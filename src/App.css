@@ -1,38 +1,123 @@
 .App {
-  text-align: center;
+  text-align: left;
+  height: 100vh;
+  overflow: hidden;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+/* Window Content Styles */
+.folder-content {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  height: 100%;
+  text-align: center;
 }
 
-.App-link {
-  color: #61dafb;
+.windows-logo-large {
+  margin-bottom: 20px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.windows-logo-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 2px;
+  width: 64px;
+  height: 64px;
+  transform: rotate(-5deg);
+}
+
+.window-pane-large {
+  width: 100%;
+  height: 100%;
+}
+
+.window-pane-large.pane-1 { background-color: #FF0000; }
+.window-pane-large.pane-2 { background-color: #00FF00; }
+.window-pane-large.pane-3 { background-color: #0000FF; }
+.window-pane-large.pane-4 { background-color: #FFFF00; }
+
+.windows-text {
+  text-align: center;
+}
+
+.microsoft-text {
+  font-size: 16px;
+  color: #000;
+  margin-bottom: 8px;
+}
+
+.windows-text-large {
+  font-size: 32px;
+  font-weight: bold;
+  color: #000;
+  margin-bottom: 4px;
+}
+
+.xp-text {
+  font-size: 20px;
+  color: #FF8C00;
+  font-weight: bold;
+  font-style: italic;
+}
+
+/* Resume Content Styles */
+.resume-content {
+  padding: 20px;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.resume-content h1 {
+  color: #0066CC;
+  font-size: 28px;
+  margin-bottom: 8px;
+}
+
+.resume-content h2 {
+  color: #333;
+  font-size: 20px;
+  margin-bottom: 16px;
+}
+
+.resume-content h3 {
+  color: #0066CC;
+  font-size: 18px;
+  margin: 20px 0 10px 0;
+}
+
+.resume-content p {
+  color: #333;
+  line-height: 1.6;
+  margin-bottom: 12px;
+}
+
+.resume-content ul {
+  color: #333;
+  line-height: 1.6;
+}
+
+.resume-content li {
+  margin-bottom: 6px;
+}
+
+.resume-section {
+  margin-bottom: 24px;
+}
+
+/* App Content Styles */
+.app-content {
+  padding: 20px;
+}
+
+.app-content h2 {
+  color: #0066CC;
+  margin-bottom: 16px;
+}
+
+.app-content p {
+  color: #333;
+  line-height: 1.6;
+  margin-bottom: 12px;
 }

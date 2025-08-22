@@ -1,0 +1,183 @@
+.window {
+  position: absolute;
+  background: #F0F0F0;
+  border: 1px solid #0054E3;
+  border-radius: 4px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  font-family: 'Tahoma', 'Arial', sans-serif;
+  overflow: hidden;
+}
+
+.window.maximized {
+  left: 0 !important;
+  top: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+}
+
+/* Title Bar */
+.window-title-bar {
+  background: linear-gradient(to bottom, #0066CC 0%, #0052A3 50%, #003D7A 100%);
+  height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 4px;
+  cursor: move;
+  color: white;
+}
+
+.title-bar-left {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.window-icon {
+  font-size: 14px;
+}
+
+.window-title {
+  font-size: 11px;
+  font-weight: bold;
+}
+
+.title-bar-right {
+  display: flex;
+  gap: 2px;
+}
+
+.title-bar-button {
+  width: 20px;
+  height: 18px;
+  border: none;
+  background: transparent;
+  color: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  border-radius: 2px;
+  transition: background-color 0.1s ease;
+}
+
+.title-bar-button:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.title-bar-button.close:hover {
+  background-color: #E81123;
+}
+
+/* Menu Bar */
+.window-menu-bar {
+  background: #E6E6E6;
+  height: 22px;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #C0C0C0;
+}
+
+.menu-item {
+  padding: 4px 8px;
+  font-size: 11px;
+  color: #000;
+  cursor: pointer;
+  border-radius: 2px;
+  transition: background-color 0.1s ease;
+}
+
+.menu-item:hover {
+  background-color: #D0D0D0;
+}
+
+/* Toolbar */
+.window-toolbar {
+  background: #E6E6E6;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 0 8px;
+  border-bottom: 1px solid #C0C0C0;
+}
+
+.toolbar-button {
+  height: 22px;
+  padding: 0 8px;
+  border: 1px solid #A0A0A0;
+  background: linear-gradient(to bottom, #F8F8F8 0%, #E8E8E8 50%, #D8D8D8 100%);
+  border-radius: 3px;
+  font-size: 11px;
+  color: #000;
+  cursor: pointer;
+  transition: all 0.1s ease;
+}
+
+.toolbar-button:hover {
+  background: linear-gradient(to bottom, #FFFFFF 0%, #F0F0F0 50%, #E0E0E0 100%);
+  border-color: #0066CC;
+}
+
+.toolbar-button:active {
+  background: linear-gradient(to bottom, #D8D8D8 0%, #C8C8C8 50%, #B8B8B8 100%);
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+/* Address Bar */
+.window-address-bar {
+  background: #E6E6E6;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 8px;
+  border-bottom: 1px solid #C0C0C0;
+}
+
+.address-label {
+  font-size: 11px;
+  color: #000;
+  white-space: nowrap;
+}
+
+.address-input {
+  flex: 1;
+  height: 18px;
+  background: white;
+  border: 1px solid #A0A0A0;
+  border-radius: 2px;
+  display: flex;
+  align-items: center;
+  padding: 0 6px;
+}
+
+.address-text {
+  font-size: 11px;
+  color: #000;
+}
+
+.go-button {
+  height: 18px;
+  padding: 0 8px;
+  border: 1px solid #A0A0A0;
+  background: linear-gradient(to bottom, #4CAF50 0%, #45A049 50%, #3D8B40 100%);
+  border-radius: 2px;
+  font-size: 10px;
+  color: white;
+  cursor: pointer;
+  transition: all 0.1s ease;
+}
+
+.go-button:hover {
+  background: linear-gradient(to bottom, #66BB6A 0%, #4CAF50 50%, #45A049 100%);
+}
+
+/* Content Area */
+.window-content {
+  background: white;
+  flex: 1;
+  padding: 16px;
+  overflow: auto;
+}
