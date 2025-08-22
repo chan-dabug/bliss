@@ -6,13 +6,13 @@ export const APP_NAMES = {
   LOGITECH_WEBCAM: 'Logitech Webcam Software',
   MICROSOFT_WINDOWS: 'Microsoft Windows XP',
   MY_COMPUTER: 'My Computer',
-  MY_DOCUMENTS: 'My Documents',
+  MY_DOCUMENTS: 'My LinkedIn',
   MY_PROFILE: 'My Profile',
   NEW_FOLDER: 'New Folder',
   PINBALL: 'Pinball',
   RECYCLE_BIN: 'Recycle Bin',
   RESUME: 'Resume',
-  WORKPLACE: 'Arbeitsplatz',
+  SPOTIFY: 'Spotify',
 } as const;
 
 export const ASSET_PATHS = {
@@ -26,7 +26,7 @@ export const ASSET_PATHS = {
     PINBALL: '/Pinball.ico',
     RECYCLE_BIN: '/Recycle Bin.ico',
     RESUME: '/Resume.ico',
-    WORKPLACE: '/My Computer.ico',
+    SPOTIFY: '/Music File.ico',
   },
 } as const;
 

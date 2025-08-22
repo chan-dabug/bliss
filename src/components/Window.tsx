@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { WindowState } from '../types';
-import { COLORS, MENU_ITEMS, TOOLBAR_BUTTONS } from '../constants';
+import { MENU_ITEMS, TOOLBAR_BUTTONS } from '../constants';
 import './Window.css';
 
 interface WindowProps {

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Desktop from './components/Desktop';
 import DesktopIcon from './components/DesktopIcon';
 import Taskbar from './components/Taskbar';
@@ -10,9 +10,9 @@ import './App.css';
 const App: React.FC = () => {
   const [desktopIcons, setDesktopIcons] = useState<DesktopIconType[]>([
     {
-      id: 'workplace',
-      name: APP_NAMES.WORKPLACE,
-      iconPath: ASSET_PATHS.ICONS.WORKPLACE,
+      id: 'spotify',
+      name: APP_NAMES.SPOTIFY,
+      iconPath: ASSET_PATHS.ICONS.SPOTIFY,
       x: 50,
       y: 50,
       type: 'folder'
@@ -24,46 +24,6 @@ const App: React.FC = () => {
       x: 50,
       y: 120,
       type: 'folder'
-    },
-    {
-      id: 'recycle-bin',
-      name: APP_NAMES.RECYCLE_BIN,
-      iconPath: ASSET_PATHS.ICONS.RECYCLE_BIN,
-      x: 50,
-      y: 190,
-      type: 'folder'
-    },
-    {
-      id: 'audacity',
-      name: APP_NAMES.AUDACITY,
-      iconPath: ASSET_PATHS.ICONS.AUDACITY,
-      x: 50,
-      y: 260,
-      type: 'app'
-    },
-    {
-      id: 'hd-adeck',
-      name: APP_NAMES.HD_ADECK,
-      iconPath: ASSET_PATHS.ICONS.HD_ADECK,
-      x: 50,
-      y: 330,
-      type: 'app'
-    },
-    {
-      id: 'logitech-webcam',
-      name: APP_NAMES.LOGITECH_WEBCAM,
-      iconPath: ASSET_PATHS.ICONS.LOGITECH_WEBCAM,
-      x: 50,
-      y: 400,
-      type: 'app'
-    },
-    {
-      id: 'intel-processor',
-      name: APP_NAMES.INTEL_PROCESSOR,
-      iconPath: ASSET_PATHS.ICONS.INTEL_PROCESSOR,
-      x: 50,
-      y: 470,
-      type: 'app'
     },
     {
       id: 'pinball',
@@ -86,6 +46,12 @@ const App: React.FC = () => {
   const [windows, setWindows] = useState<WindowState[]>([]);
   const [selectedIcon, setSelectedIcon] = useState<string | null>(null);
   const [nextWindowId, setNextWindowId] = useState(1);
+
+  const handleIconMove = (iconId: string, x: number, y: number) => {
+    setDesktopIcons(prev => prev.map(icon => 
+      icon.id === iconId ? { ...icon, x, y } : icon
+    ));
+  };
 
   const handleIconClick = (iconId: string) => {
     setSelectedIcon(iconId);
@@ -266,6 +232,7 @@ const App: React.FC = () => {
             icon={icon}
             onClick={() => handleIconClick(icon.id)}
             isSelected={selectedIcon === icon.id}
+            onMove={(x, y) => handleIconMove(icon.id, x, y)}
           />
         ))}
 

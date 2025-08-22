@@ -1,6 +1,5 @@
 import React from 'react';
 import { TaskbarItem } from '../types';
-import { COLORS, DIMENSIONS, APP_NAMES } from '../constants';
 import './Taskbar.css';
 
 interface TaskbarProps {

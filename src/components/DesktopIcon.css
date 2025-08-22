@@ -8,6 +8,7 @@
   padding: 4px;
   border-radius: 4px;
   transition: background-color 0.1s ease;
+  touch-action: none; /* Prevents touch scrolling on mobile */
 }
 
 .desktop-icon:hover {
@@ -16,6 +17,16 @@
 
 .desktop-icon.selected {
   background-color: rgba(0, 102, 204, 0.3);
+}
+
+.desktop-icon.dragging {
+  opacity: 0.8;
+  z-index: 1000;
+  cursor: grabbing;
+}
+
+.desktop-icon.placed {
+  transition: all 0.2s ease;
 }
 
 .icon-image {
@@ -29,6 +40,7 @@
   image-rendering: pixelated;
   image-rendering: -moz-crisp-edges;
   image-rendering: crisp-edges;
+  pointer-events: none; /* Prevents image from interfering with drag */
 }
 
 .icon-text {
@@ -40,4 +52,5 @@
   line-height: 1.2;
   word-wrap: break-word;
   max-width: 100%;
+  pointer-events: none; /* Prevents text from interfering with drag */
 }
