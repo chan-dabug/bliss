@@ -27,6 +27,7 @@ export const ASSET_PATHS = {
     RECYCLE_BIN: '/Recycle Bin.ico',
     RESUME: '/Resume.ico',
     SPOTIFY: '/Music File.ico',
+    CYBER_SECURITY: '/cybersecurity.png',
   },
 } as const;
 

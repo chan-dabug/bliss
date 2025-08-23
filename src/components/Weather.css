@@ -1,0 +1,53 @@
+.weather-icon {
+  cursor: pointer;
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.weather-icon:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+  transform: scale(1.1);
+}
+
+.weather-emoji {
+  font-size: 14px;
+  color: white;
+}
+
+/* Weather Details Tooltip */
+.weather-details {
+  position: absolute;
+  bottom: 35px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: linear-gradient(to bottom, #E6E6E6 0%, #D4D4D4 50%, #C2C2C2 100%);
+  border: 1px solid #A0A0A0;
+  border-radius: 4px;
+  padding: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  z-index: 1001;
+  min-width: 150px;
+  text-align: center;
+  font-family: 'Tahoma', 'Arial', sans-serif;
+}
+
+.weather-location {
+  font-size: 12px;
+  color: #000;
+  font-weight: bold;
+  margin-bottom: 4px;
+  white-space: nowrap;
+}
+
+.weather-temp {
+  font-size: 18px;
+  color: #0066CC;
+  font-weight: bold;
+  margin-bottom: 4px;
+}
+
+.weather-condition {
+  font-size: 10px;
+  color: #666;
+  text-transform: capitalize;
+}

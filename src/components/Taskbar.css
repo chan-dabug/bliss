@@ -172,12 +172,40 @@
   background-color: rgba(255, 255, 255, 0.1);
 }
 
+.tray-icon.speaker-icon {
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.tray-icon.speaker-icon:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+  transform: scale(1.1);
+}
+
+.tray-icon.speaker-icon.muted {
+  opacity: 0.7;
+}
+
+.tray-icon.speaker-icon.muted:hover {
+  opacity: 1;
+}
+
+.tray-icon.security-icon {
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.tray-icon.security-icon:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+  transform: scale(1.1);
+}
+
 .arrow-up {
   color: white;
   font-size: 10px;
 }
 
-.speaker-icon, .network-icon, .security-icon {
+.speaker-icon, .security-icon {
   color: white;
   font-size: 12px;
 }
