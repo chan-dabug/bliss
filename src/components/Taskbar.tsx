@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { TaskbarItem } from '../types';
 import Weather from './Weather';
+import OtherProjectsModal from './OtherProjectsModal';
 import './Taskbar.css';
 import { ASSET_PATHS } from '../constants';
 
@@ -20,6 +21,7 @@ const Taskbar: React.FC<TaskbarProps> = ({ openWindows, onStartClick, onWindowCl
   const [isMuted, setIsMuted] = useState(false);
   const [audioContext, setAudioContext] = useState<AudioContext | null>(null);
   const [clock, setClock] = useState(desktopClock);
+  const [isOtherProjectsOpen, setIsOtherProjectsOpen] = useState(false);
 
   useEffect(() => {
     // Initialize audio context
@@ -60,6 +62,22 @@ const Taskbar: React.FC<TaskbarProps> = ({ openWindows, onStartClick, onWindowCl
     }
   };
 
+  const handleOtherProjectsClick = () => {
+    setIsOtherProjectsOpen(true);
+  };
+
+  const handleOtherProjectsClose = () => {
+    setIsOtherProjectsOpen(false);
+  };
+
+  const handleOtherProjectsMinimize = () => {
+    setIsOtherProjectsOpen(false);
+  };
+
+  const handleOtherProjectsMaximize = () => {
+    // Could implement maximize functionality
+  };
+
   return (
     <div className="taskbar">
       {/* Start Button */}
@@ -77,14 +95,12 @@ const Taskbar: React.FC<TaskbarProps> = ({ openWindows, onStartClick, onWindowCl
 
       {/* Quick Launch Icons */}
       <div className="quick-launch">
-        <div className="quick-launch-icon" title="Internet Explorer">
-          <div className="ie-icon">e</div>
-        </div>
-        <div className="quick-launch-icon" title="Windows Explorer">
-          <div className="explorer-icon">📁</div>
-        </div>
-        <div className="quick-launch-icon" title="Outlook Express">
-          <div className="outlook-icon">✉</div>
+        <div 
+          className="quick-launch-icon" 
+          title="Other Projects"
+          onClick={handleOtherProjectsClick}
+        >
+          <div className="other-projects-folder">📁</div>
         </div>
       </div>
 
@@ -99,11 +115,20 @@ const Taskbar: React.FC<TaskbarProps> = ({ openWindows, onStartClick, onWindowCl
             {window.title}
           </div>
         ))}
+        
+        {/* Other Projects Taskbar Tab */}
+        {isOtherProjectsOpen && (
+          <div 
+            className="taskbar-window active"
+            onClick={() => setIsOtherProjectsOpen(true)}
+          >
+            Other Projects
+          </div>
+        )}
       </div>
 
       {/* System Tray */}
       <div className="system-tray">
-
         <div 
           className={`tray-icon speaker-icon ${isMuted ? 'muted' : ''}`} 
           title={isMuted ? 'Unmute' : 'Mute'}
@@ -125,6 +150,14 @@ const Taskbar: React.FC<TaskbarProps> = ({ openWindows, onStartClick, onWindowCl
           {clock}
         </div>
       </div>
+
+      {/* Other Projects Modal */}
+      <OtherProjectsModal
+        isOpen={isOtherProjectsOpen}
+        onClose={handleOtherProjectsClose}
+        onMinimize={handleOtherProjectsMinimize}
+        onMaximize={handleOtherProjectsMaximize}
+      />
     </div>
   );
 };
