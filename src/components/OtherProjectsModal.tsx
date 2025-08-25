@@ -145,12 +145,7 @@ const OtherProjectsModal: React.FC<OtherProjectsModalProps> = ({
 
         {/* Menu Bar */}
         <div className="modal-menu-bar">
-          <div className="menu-item">File</div>
-          <div className="menu-item">Edit</div>
-          <div className="menu-item">View</div>
-          <div className="menu-item">Favorites</div>
-          <div className="menu-item">Tools</div>
-          <div className="menu-item">Help</div>
+          <div className="menu-item">Here are some other things I've been working on! Notice a bug 🐛? <a href="https://google.com" target="_blank" rel="noopener noreferrer">File a ticket</a></div>
         </div>
 
         {/* Address Bar */}

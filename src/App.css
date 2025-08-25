@@ -1,21 +1,23 @@
+/* Global App Styles */
 .App {
-  text-align: left;
+  text-align: center;
   height: 100vh;
   overflow: hidden;
 }
 
-/* Window Content Styles */
-.folder-content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 100%;
-  text-align: center;
+/* Window Content Styles - Now handled by styled-components */
+.folder-content,
+.resume-content,
+.app-content {
+  padding: 20px;
+  font-family: 'Tahoma', 'Segoe UI', 'Arial', sans-serif;
 }
 
+/* Windows Logo Styles */
 .windows-logo-large {
-  margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
+  margin: 40px 0;
 }
 
 .windows-logo-grid {
@@ -23,101 +25,343 @@
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr 1fr;
   gap: 2px;
-  width: 64px;
-  height: 64px;
-  transform: rotate(-5deg);
+  width: 80px;
+  height: 80px;
 }
 
 .window-pane-large {
-  width: 100%;
-  height: 100%;
+  background: #0066CC;
+  border-radius: 2px;
 }
-
-.window-pane-large.pane-1 { background-color: #FF0000; }
-.window-pane-large.pane-2 { background-color: #00FF00; }
-.window-pane-large.pane-3 { background-color: #0000FF; }
-.window-pane-large.pane-4 { background-color: #FFFF00; }
 
 .windows-text {
   text-align: center;
+  margin: 20px 0;
 }
 
 .microsoft-text {
   font-size: 16px;
-  color: #000;
+  color: #666;
   margin-bottom: 8px;
 }
 
 .windows-text-large {
   font-size: 32px;
   font-weight: bold;
-  color: #000;
+  color: #0066CC;
   margin-bottom: 4px;
 }
 
 .xp-text {
-  font-size: 20px;
-  color: #FF8C00;
-  font-weight: bold;
+  font-size: 18px;
+  color: #666;
   font-style: italic;
 }
 
-/* Resume Content Styles */
-.resume-content {
-  padding: 20px;
-  max-width: 600px;
-  margin: 0 auto;
+/* Folder Info */
+.folder-info {
+  margin-top: 30px;
+  text-align: center;
+  color: #666;
 }
 
+.folder-info p {
+  margin: 8px 0;
+}
+
+/* LinkedIn Content Styles */
+.linkedin-content {
+  text-align: left;
+}
+
+.linkedin-content h1 {
+  color: #0066CC;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.profile-section {
+  margin-bottom: 20px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #E0E0E0;
+}
+
+.profile-section h2 {
+  color: #333;
+  margin-bottom: 5px;
+}
+
+.profile-section .title {
+  color: #666;
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+
+.profile-section .location {
+  color: #888;
+  font-size: 12px;
+}
+
+.skills-section,
+.experience-section,
+.contact-section {
+  margin-bottom: 20px;
+}
+
+.skills-section h3,
+.experience-section h3,
+.contact-section h3 {
+  color: #333;
+  margin-bottom: 10px;
+  font-size: 14px;
+}
+
+.skills-section ul {
+  list-style: none;
+  padding: 0;
+}
+
+.skills-section li {
+  padding: 4px 0;
+  color: #555;
+  font-size: 12px;
+}
+
+.experience-section p {
+  color: #666;
+  font-size: 12px;
+  margin: 5px 0;
+}
+
+.contact-section p {
+  color: #0066CC;
+  font-size: 12px;
+  margin: 5px 0;
+}
+
+/* Coder's Playlist Styles */
+.playlist-section {
+  text-align: left;
+}
+
+.playlist-section h3 {
+  color: #333;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.playlist-tracks {
+  margin-bottom: 20px;
+}
+
+.track {
+  display: flex;
+  align-items: center;
+  padding: 8px;
+  border-bottom: 1px solid #F0F0F0;
+  transition: background-color 0.1s ease;
+}
+
+.track:hover {
+  background-color: #F8F8F8;
+}
+
+.track-number {
+  width: 20px;
+  color: #999;
+  font-size: 12px;
+}
+
+.track-title {
+  flex: 1;
+  color: #333;
+  font-weight: bold;
+  font-size: 14px;
+  margin: 0 15px;
+}
+
+.track-artist {
+  color: #666;
+  font-size: 12px;
+}
+
+.playlist-controls {
+  text-align: center;
+}
+
+.control-btn {
+  background: #0066CC;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  margin: 0 5px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 12px;
+  transition: background-color 0.1s ease;
+}
+
+.control-btn:hover {
+  background: #0052A3;
+}
+
+/* Pinball Game Styles */
+.game-section {
+  text-align: center;
+}
+
+.game-section h3 {
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.game-board {
+  margin: 20px 0;
+}
+
+.pinball-table {
+  width: 300px;
+  height: 200px;
+  background: linear-gradient(to bottom, #2C3E50 0%, #34495E 100%);
+  border: 3px solid #E74C3C;
+  border-radius: 10px;
+  margin: 0 auto;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 20px;
+}
+
+.bumpers {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 20px;
+}
+
+.bumper {
+  width: 30px;
+  height: 30px;
+  background: #F39C12;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 16px;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}
+
+.flippers {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.flipper {
+  width: 40px;
+  height: 20px;
+  background: #E74C3C;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  font-size: 16px;
+}
+
+.score {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  color: #F39C12;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.game-controls {
+  margin-top: 20px;
+}
+
+.game-controls p {
+  color: #666;
+  font-size: 12px;
+  margin: 5px 0;
+}
+
+/* Resume Content Styles */
 .resume-content h1 {
   color: #0066CC;
-  font-size: 28px;
-  margin-bottom: 8px;
+  margin-bottom: 10px;
 }
 
 .resume-content h2 {
   color: #333;
-  font-size: 20px;
-  margin-bottom: 16px;
-}
-
-.resume-content h3 {
-  color: #0066CC;
+  margin-bottom: 20px;
   font-size: 18px;
-  margin: 20px 0 10px 0;
 }
 
 .resume-content p {
-  color: #333;
-  line-height: 1.6;
-  margin-bottom: 12px;
-}
-
-.resume-content ul {
-  color: #333;
-  line-height: 1.6;
-}
-
-.resume-content li {
-  margin-bottom: 6px;
+  color: #666;
+  margin-bottom: 15px;
+  line-height: 1.5;
 }
 
 .resume-section {
-  margin-bottom: 24px;
+  margin: 25px 0;
+  text-align: left;
 }
 
-/* App Content Styles */
-.app-content {
-  padding: 20px;
-}
-
-.app-content h2 {
-  color: #0066CC;
-  margin-bottom: 16px;
-}
-
-.app-content p {
+.resume-section h3 {
   color: #333;
-  line-height: 1.6;
-  margin-bottom: 12px;
+  margin-bottom: 10px;
+  border-bottom: 2px solid #0066CC;
+  padding-bottom: 5px;
+}
+
+.resume-section ul {
+  list-style: none;
+  padding: 0;
+}
+
+.resume-section li {
+  padding: 5px 0;
+  color: #555;
+  position: relative;
+  padding-left: 20px;
+}
+
+.resume-section li::before {
+  content: '▶';
+  color: #0066CC;
+  position: absolute;
+  left: 0;
+}
+
+/* File Content Styles */
+.file-content h2 {
+  color: #333;
+  margin-bottom: 15px;
+}
+
+.file-content p {
+  color: #666;
+  margin-bottom: 10px;
+}
+
+/* Default Content Styles */
+.default-content h2 {
+  color: #333;
+  margin-bottom: 15px;
+}
+
+.default-content p {
+  color: #666;
+  margin-bottom: 10px;
 }

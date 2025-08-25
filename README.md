@@ -1,46 +1,220 @@
-# Getting Started with Create React App
+# Windows XP Portfolio Site
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A React + TypeScript portfolio website that authentically mimics the Windows XP desktop experience. Built with modern web technologies while maintaining the nostalgic look and feel of Microsoft's classic operating system.
 
-## Available Scripts
+## 🚀 Features
 
-In the project directory, you can run:
+### Desktop Experience
+- **Bliss Wallpaper**: Authentic Windows XP background
+- **Draggable Icons**: Desktop icons can be moved and positions persist across sessions
+- **Icon Selection**: Single-click selects icons (blue highlight), double-click opens
+- **Keyboard Support**: Enter key opens selected icons
 
-### `npm start`
+### Windows System
+- **XP-Style Windows**: Authentic title bars with minimize/close controls
+- **Window Manager**: Proper z-order management and focus handling
+- **Draggable Windows**: Move windows by dragging the title bar
+- **Taskbar Integration**: Open windows appear as taskbar buttons
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### Start Menu
+- **Two-Pane Design**: White left pane with bio, blue right pane with programs
+- **User Profile**: Avatar, name, and title display
+- **Quick Links**: Email, GitHub, LinkedIn shortcuts
+- **Program List**: Mirrors desktop icons for easy access
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+### Taskbar
+- **Start Button**: Green gradient button with Windows logo
+- **Live Clock**: Auto-updating time display
+- **Audio Controls**: Speaker icon with mute/unmute functionality
+- **Weather App**: Mini weather widget with location detection
+- **Security Icon**: Links to SANS Internet Storm Center
 
-### `npm test`
+## 🛠️ Technical Implementation
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Architecture
+- **React 18**: Modern functional components with hooks
+- **TypeScript**: Full type safety throughout the application
+- **Context API**: Window manager and class token providers
+- **Local Storage**: Icon position persistence
 
-### `npm run build`
+### Component Structure
+```
+src/
+├── components/
+│   ├── Desktop.tsx          # Main desktop container
+│   ├── DesktopIcon.tsx      # Draggable desktop icons
+│   ├── XpWindow.tsx         # Windows XP-style windows
+│   ├── WindowLayer.tsx      # Window rendering layer
+│   ├── Taskbar.tsx          # Bottom taskbar
+│   └── StartMenu.tsx        # Start menu system
+├── contexts/
+│   ├── WindowManagerContext.tsx    # Window state management
+│   └── ClassTokenProvider.tsx      # Production class obfuscation
+├── utils/
+│   └── windowContentFactory.tsx    # Dynamic window content
+├── types/
+│   └── index.ts             # TypeScript interfaces
+└── constants/
+    └── index.ts             # App constants and asset paths
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Key Technologies
+- **Custom Drag & Drop**: Pure React implementation for smooth icon movement
+- **Web Audio API**: System audio control for mute/unmute
+- **Geolocation API**: User location for weather data
+- **OpenWeatherMap API**: Real-time weather information
+- **Local Storage**: Persistent icon positioning
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## 🎨 Visual Design
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Windows XP Luna Blue Theme
+- **Fonts**: Tahoma (fallback: Segoe UI, Arial)
+- **Colors**: Authentic XP palette (#3f76c3, #2b579a, #F0F0F0)
+- **Gradients**: Vertical gradients matching XP Luna Blue
+- **Borders**: 2px dark borders with light inner edges
+- **Shadows**: Subtle drop shadows for depth
 
-### `npm run eject`
+### Responsive Elements
+- **Taskbar**: Fixed 42px height with proper proportions
+- **Windows**: 600x450px default size, draggable within viewport
+- **Icons**: 32x32px with 20px text area below
+- **Start Menu**: 400x500px with proper positioning
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## 🚀 Getting Started
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Prerequisites
+- Node.js 16+ 
+- npm or yarn
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+### Installation
+```bash
+# Clone the repository
+git clone <repository-url>
+cd bliss
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+# Install dependencies
+npm install
 
-## Learn More
+# Start development server
+npm start
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### Environment Variables
+Create a `.env.local` file for development:
+```env
+REACT_APP_BUILD_SALT=dev-salt
+REACT_APP_WEATHER_API_KEY=your_openweathermap_api_key
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### Production Build
+```bash
+# Build for production
+npm run build
+
+# The build will include:
+# - Obfuscated class names
+# - No source maps
+# - Minified and optimized code
+# - Persistent icon positions
+```
+
+## 🔧 Configuration
+
+### Customizing Icons
+Edit `src/constants/index.ts` to modify:
+- App names and labels
+- Icon asset paths
+- Default icon positions
+
+### Adding New Window Types
+Extend `src/utils/windowContentFactory.tsx` to add:
+- New content types
+- Custom window layouts
+- Dynamic content generation
+
+### Modifying the Theme
+Update CSS variables in component files:
+- Color schemes
+- Dimensions
+- Typography
+- Spacing
+
+## 🧪 Testing
+
+### Manual Testing
+- **Icon Dragging**: Move icons around desktop
+- **Window Management**: Open, close, minimize windows
+- **Start Menu**: Navigate through menu items
+- **Taskbar**: Test all system tray functions
+- **Persistence**: Reload page to verify icon positions
+
+### Automated Testing
+```bash
+# Run tests
+npm test
+
+# Run tests with coverage
+npm test -- --coverage
+```
+
+## 📱 Browser Support
+
+- **Chrome**: 90+
+- **Firefox**: 88+
+- **Safari**: 14+
+- **Edge**: 90+
+
+## 🚀 Deployment
+
+### Static Hosting
+The app is designed for static hosting platforms:
+- **Vercel**: Zero-config deployment
+- **Netlify**: Drag-and-drop deployment
+- **GitHub Pages**: Free hosting for public repos
+- **AWS S3**: Scalable static hosting
+
+### Build Optimization
+Production builds include:
+- Tree-shaking for unused code
+- Minification and compression
+- Class name obfuscation
+- No source maps
+- Optimized asset loading
+
+## 🎯 Future Enhancements
+
+### Planned Features
+- **Window Resizing**: Drag handles for window resizing
+- **Multi-Monitor Support**: Extended desktop functionality
+- **Custom Themes**: Alternative XP themes (Silver, Olive)
+- **File System**: Basic file/folder operations
+- **Context Menus**: Right-click functionality
+
+### Performance Improvements
+- **Virtual Scrolling**: For large icon lists
+- **Lazy Loading**: Window content on demand
+- **Service Worker**: Offline functionality
+- **WebAssembly**: Performance-critical operations
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Add tests if applicable
+5. Submit a pull request
+
+## 📄 License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+## 🙏 Acknowledgments
+
+- **Microsoft**: Windows XP design inspiration
+- **React Team**: Amazing framework
+- **OpenWeatherMap**: Weather data API
+- **Community**: Feedback and suggestions
+
+---
+
+Built with ❤️ and nostalgia by Chan Boswell

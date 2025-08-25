@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import './Weather.css';
+import styled from 'styled-components';
 
 interface WeatherData {
   temperature: number;
@@ -7,6 +7,66 @@ interface WeatherData {
   location: string;
   emoji: string;
 }
+
+const WeatherIcon = styled.div`
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border-radius: 3px;
+  transition: background-color 0.1s ease;
+  
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+`;
+
+const WeatherEmoji = styled.div`
+  font-size: 16px;
+`;
+
+const WeatherDetails = styled.div`
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.9);
+  color: white;
+  padding: 8px 12px;
+  border-radius: 4px;
+  font-size: 11px;
+  white-space: nowrap;
+  margin-bottom: 8px;
+  z-index: 1001;
+  
+  &::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 4px solid transparent;
+    border-top-color: rgba(0, 0, 0, 0.9);
+  }
+`;
+
+const WeatherLocation = styled.div`
+  font-weight: bold;
+  margin-bottom: 4px;
+`;
+
+const WeatherTemp = styled.div`
+  font-size: 14px;
+  font-weight: bold;
+  color: #FFD700;
+  margin-bottom: 2px;
+`;
+
+const WeatherCondition = styled.div`
+  color: #CCCCCC;
+`;
 
 const Weather: React.FC = () => {
   const [weather, setWeather] = useState<WeatherData | null>(null);
@@ -103,38 +163,37 @@ const Weather: React.FC = () => {
 
   if (loading) {
     return (
-      <div className="tray-icon weather-icon" title="Loading weather...">
-        <div className="weather-emoji">⏳</div>
-      </div>
+      <WeatherIcon title="Loading weather...">
+        <WeatherEmoji>⏳</WeatherEmoji>
+      </WeatherIcon>
     );
   }
 
   if (error && !weather) {
     return (
-      <div className="tray-icon weather-icon" title="Weather unavailable">
-        <div className="weather-emoji">❌</div>
-      </div>
+      <WeatherIcon title="Weather unavailable">
+        <WeatherEmoji>❌</WeatherEmoji>
+      </WeatherIcon>
     );
   }
 
   return (
-    <div 
-      className="tray-icon weather-icon" 
+    <WeatherIcon 
       title="Current Weather"
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
-      <div className="weather-emoji">{weather?.emoji}</div>
+      <WeatherEmoji>{weather?.emoji}</WeatherEmoji>
       
       {/* Weather Details Tooltip */}
       {showDetails && weather && (
-        <div className="weather-details">
-          <div className="weather-location">{weather.location}</div>
-          <div className="weather-temp">{weather.temperature}°F</div>
-          <div className="weather-condition">{weather.condition}</div>
-        </div>
+        <WeatherDetails>
+          <WeatherLocation>{weather.location}</WeatherLocation>
+          <WeatherTemp>{weather.temperature}°F</WeatherTemp>
+          <WeatherCondition>{weather.condition}</WeatherCondition>
+        </WeatherDetails>
       )}
-    </div>
+    </WeatherIcon>
   );
 };
 

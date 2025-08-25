@@ -1,226 +1,81 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
+import { WindowManagerProvider, useWindowManager } from './contexts/WindowManagerContext';
+import { ClassTokenProvider } from './contexts/ClassTokenProvider';
 import Desktop from './components/Desktop';
 import DesktopIcon from './components/DesktopIcon';
 import Taskbar from './components/Taskbar';
-import Window from './components/Window';
-import { DesktopIcon as DesktopIconType, WindowState, TaskbarItem } from './types';
+import StartMenu from './components/StartMenu';
+import WindowLayer from './components/WindowLayer';
+import { DesktopIcon as DesktopIconType } from './types';
 import { ASSET_PATHS, APP_NAMES } from './constants';
+import { createWindowContent } from './utils/windowContentFactory';
 import './App.css';
 
-const App: React.FC = () => {
+const AppContent: React.FC = () => {
+  const { open } = useWindowManager();
   const [desktopIcons, setDesktopIcons] = useState<DesktopIconType[]>([
     {
-      id: 'spotify',
-      name: APP_NAMES.SPOTIFY,
-      iconPath: ASSET_PATHS.ICONS.SPOTIFY,
+      id: 'my-linkedin',
+      name: 'My LinkedIn',
+      iconPath: ASSET_PATHS.ICONS.MY_PROFILE,
       x: 50,
       y: 50,
       type: 'folder'
     },
     {
-      id: 'my-documents',
-      name: APP_NAMES.MY_DOCUMENTS,
-      iconPath: ASSET_PATHS.ICONS.MY_PROFILE,
+      id: 'coders-playlist',
+      name: "Coder's Playlist",
+      iconPath: ASSET_PATHS.ICONS.AUDACITY,
       x: 50,
       y: 120,
-      type: 'folder'
+      type: 'app'
     },
     {
       id: 'pinball',
       name: APP_NAMES.PINBALL,
       iconPath: ASSET_PATHS.ICONS.PINBALL,
-      x: 200,
-      y: 50,
+      x: 50,
+      y: 190,
       type: 'app'
     },
     {
       id: 'resume',
       name: APP_NAMES.RESUME,
       iconPath: ASSET_PATHS.ICONS.RESUME,
-      x: 200,
-      y: 120,
+      x: 50,
+      y: 260,
       type: 'file'
     }
   ]);
 
-  const [windows, setWindows] = useState<WindowState[]>([]);
   const [selectedIcon, setSelectedIcon] = useState<string | null>(null);
-  const [nextWindowId, setNextWindowId] = useState(1);
+  const [isStartMenuOpen, setIsStartMenuOpen] = useState(false);
 
-  const handleIconMove = (iconId: string, x: number, y: number) => {
+  const handleIconMove = useCallback((iconId: string, x: number, y: number) => {
     setDesktopIcons(prev => prev.map(icon => 
       icon.id === iconId ? { ...icon, x, y } : icon
     ));
-  };
+  }, []);
 
-  const handleIconClick = (iconId: string) => {
+  const handleIconSelect = useCallback((iconId: string) => {
     setSelectedIcon(iconId);
-    
-    const icon = desktopIcons.find(i => i.id === iconId);
-    if (!icon) return;
+  }, []);
 
-    // Handle different icon types
-    switch (icon.type) {
-      case 'folder':
-        openFolderWindow(icon);
-        break;
-      case 'file':
-        if (iconId === 'resume') {
-          openResumeWindow(icon);
-        }
-        break;
-      case 'app':
-        openAppWindow(icon);
-        break;
-    }
-  };
+  const handleIconClick = useCallback((icon: DesktopIconType) => {
+    // Open window using the window manager
+    const content = createWindowContent(icon);
+    open(icon.id, icon.name, content);
+  }, []); // Remove open dependency
 
-  const openFolderWindow = (icon: DesktopIconType) => {
-    const newWindow: WindowState = {
-      id: `window-${nextWindowId}`,
-      isOpen: true,
-      isMinimized: false,
-      isMaximized: false,
-      x: 100 + (nextWindowId * 20),
-      y: 100 + (nextWindowId * 20),
-      width: 600,
-      height: 400,
-      title: icon.name,
-      content: (
-        <div className="folder-content">
-          <div className="windows-logo-large">
-            <div className="windows-logo-grid">
-              <div className="window-pane-large pane-1"></div>
-              <div className="window-pane-large pane-2"></div>
-              <div className="window-pane-large pane-3"></div>
-              <div className="window-pane-large pane-4"></div>
-            </div>
-          </div>
-          <div className="windows-text">
-            <div className="microsoft-text">Microsoft</div>
-            <div className="windows-text-large">Windows</div>
-            <div className="xp-text">xp</div>
-          </div>
-        </div>
-      )
-    };
+  const handleStartClick = useCallback(() => {
+    setIsStartMenuOpen(prev => !prev);
+  }, []);
 
-    setWindows(prev => [...prev, newWindow]);
-    setNextWindowId(prev => prev + 1);
-  };
-
-  const openResumeWindow = (icon: DesktopIconType) => {
-    const newWindow: WindowState = {
-      id: `window-${nextWindowId}`,
-      isOpen: true,
-      isMinimized: false,
-      isMaximized: false,
-      x: 100 + (nextWindowId * 20),
-      y: 100 + (nextWindowId * 20),
-      width: 800,
-      height: 600,
-      title: `${icon.name} - Portfolio`,
-      content: (
-        <div className="resume-content">
-          <h1>Chan Boswell</h1>
-          <h2>Software Developer</h2>
-          <p>Welcome to my Windows XP-themed portfolio!</p>
-          <p>This is a creative way to showcase my skills in React, TypeScript, and CSS.</p>
-          <div className="resume-section">
-            <h3>Skills</h3>
-            <ul>
-              <li>React & TypeScript</li>
-              <li>Node.js & Express</li>
-              <li>CSS & Styling</li>
-              <li>UI/UX Design</li>
-            </ul>
-          </div>
-          <div className="resume-section">
-            <h3>Experience</h3>
-            <p>Building nostalgic and creative web experiences</p>
-          </div>
-        </div>
-      )
-    };
-
-    setWindows(prev => [...prev, newWindow]);
-    setNextWindowId(prev => prev + 1);
-  };
-
-  const openAppWindow = (icon: DesktopIconType) => {
-    const newWindow: WindowState = {
-      id: `window-${nextWindowId}`,
-      isOpen: true,
-      isMinimized: false,
-      isMaximized: false,
-      x: 100 + (nextWindowId * 20),
-      y: 100 + (nextWindowId * 20),
-      width: 500,
-      height: 300,
-      title: icon.name,
-      content: (
-        <div className="app-content">
-          <h2>{icon.name}</h2>
-          <p>This is a placeholder for the {icon.name} application.</p>
-          <p>In a real implementation, this could be a portfolio project showcase.</p>
-        </div>
-      )
-    };
-
-    setWindows(prev => [...prev, newWindow]);
-    setNextWindowId(prev => prev + 1);
-  };
-
-  const closeWindow = (windowId: string) => {
-    setWindows(prev => prev.map(w => 
-      w.id === windowId ? { ...w, isOpen: false } : w
-    ));
-  };
-
-  const minimizeWindow = (windowId: string) => {
-    setWindows(prev => prev.map(w => 
-      w.id === windowId ? { ...w, isMinimized: !w.isMinimized } : w
-    ));
-  };
-
-  const maximizeWindow = (windowId: string) => {
-    setWindows(prev => prev.map(w => 
-      w.id === windowId ? { ...w, isMaximized: !w.isMaximized } : w
-    ));
-  };
-
-  const moveWindow = (windowId: string, x: number, y: number) => {
-    setWindows(prev => prev.map(w => 
-      w.id === windowId ? { ...w, x, y } : w
-    ));
-  };
-
-  const resizeWindow = (windowId: string, width: number, height: number) => {
-    setWindows(prev => prev.map(w => 
-      w.id === windowId ? { ...w, width, height } : w
-    ));
-  };
-
-  const getTaskbarItems = (): TaskbarItem[] => {
-    return windows
-      .filter(w => w.isOpen && !w.isMinimized)
-      .map(w => ({
-        id: w.id,
-        title: w.title,
-        isActive: true,
-        isMinimized: false,
-        onClick: () => minimizeWindow(w.id)
-      }));
-  };
-
-  const handleStartClick = () => {
-    // Could open a start menu here
-    console.log('Start button clicked');
-  };
-
-  const handleWindowClick = (windowId: string) => {
-    minimizeWindow(windowId);
-  };
+  const handleStartMenuIconClick = useCallback((icon: DesktopIconType) => {
+    // Open window using the window manager
+    const content = createWindowContent(icon);
+    open(icon.id, icon.name, content);
+  }, []); // Remove open dependency
 
   return (
     <div className="App">
@@ -230,33 +85,40 @@ const App: React.FC = () => {
           <DesktopIcon
             key={icon.id}
             icon={icon}
-            onClick={() => handleIconClick(icon.id)}
+            onClick={() => handleIconClick(icon)}
             isSelected={selectedIcon === icon.id}
+            onSelect={() => handleIconSelect(icon.id)}
             onMove={(x, y) => handleIconMove(icon.id, x, y)}
           />
         ))}
 
-        {/* Windows */}
-        {windows.map((window) => (
-          <Window
-            key={window.id}
-            window={window}
-            onClose={() => closeWindow(window.id)}
-            onMinimize={() => minimizeWindow(window.id)}
-            onMaximize={() => maximizeWindow(window.id)}
-            onMove={(x, y) => moveWindow(window.id, x, y)}
-            onResize={(width, height) => resizeWindow(window.id, width, height)}
-          />
-        ))}
+        {/* Window Layer */}
+        <WindowLayer />
 
         {/* Taskbar */}
         <Taskbar
-          openWindows={getTaskbarItems()}
           onStartClick={handleStartClick}
-          onWindowClick={handleWindowClick}
+        />
+
+        {/* Start Menu */}
+        <StartMenu 
+          isOpen={isStartMenuOpen} 
+          onClose={() => setIsStartMenuOpen(false)}
+          desktopIcons={desktopIcons}
+          onIconClick={handleStartMenuIconClick}
         />
       </Desktop>
     </div>
+  );
+};
+
+const App: React.FC = () => {
+  return (
+    <ClassTokenProvider>
+      <WindowManagerProvider>
+        <AppContent />
+      </WindowManagerProvider>
+    </ClassTokenProvider>
   );
 };
 

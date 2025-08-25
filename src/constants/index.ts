@@ -1,24 +1,27 @@
 // Windows XP Portfolio Constants
 export const APP_NAMES = {
   AUDACITY: 'Audacity',
+  CYBER_SECURITY: 'Cyber Security',
   HD_ADECK: 'HD ADeck',
   INTEL_PROCESSOR: 'Intel Processor Diagnostic Tool',
   LOGITECH_WEBCAM: 'Logitech Webcam Software',
   MICROSOFT_WINDOWS: 'Microsoft Windows XP',
   MY_COMPUTER: 'My Computer',
-  MY_DOCUMENTS: 'My LinkedIn',
+  MY_DOCUMENTS: 'My Documents',
   MY_PROFILE: 'My Profile',
   NEW_FOLDER: 'New Folder',
   PINBALL: 'Pinball',
   RECYCLE_BIN: 'Recycle Bin',
   RESUME: 'Resume',
   SPOTIFY: 'Spotify',
+  WORKPLACE: 'Arbeitsplatz',
 } as const;
 
 export const ASSET_PATHS = {
   BACKGROUND: '/r6g38aXSaQWtd1KxwJbQ-Fs5jtSVDxX3wtLHJEdqixw.webp',
   ICONS: {
     AUDACITY: '/Music File.ico',
+    CYBER_SECURITY: '/cybersecurity.png',
     HD_ADECK: '/HD ADeck.ico',
     INTEL_PROCESSOR: '/Intel Processor Diagnostic Tool.ico',
     LOGITECH_WEBCAM: '/Logitech Webcam Software.ico',
@@ -26,8 +29,8 @@ export const ASSET_PATHS = {
     PINBALL: '/Pinball.ico',
     RECYCLE_BIN: '/Recycle Bin.ico',
     RESUME: '/Resume.ico',
-    SPOTIFY: '/Music File.ico',
-    CYBER_SECURITY: '/cybersecurity.png',
+    SPOTIFY: '/spotify.png',
+    WORKPLACE: '/My Computer.ico',
   },
 } as const;
 

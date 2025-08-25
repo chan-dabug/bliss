@@ -1,24 +1,27 @@
 import React from 'react';
-import { ASSET_PATHS } from '../constants';
-import './Desktop.css';
+import styled from 'styled-components';
 
 interface DesktopProps {
   children: React.ReactNode;
 }
 
+const DesktopContainer = styled.div`
+  width: 100vw;
+  height: 100vh;
+  background-image: url('/r6g38aXSaQWtd1KxwJbQ-Fs5jtSVDxX3wtLHJEdqixw.webp');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+  overflow: hidden;
+  font-family: 'Tahoma', 'Segoe UI', 'Arial', sans-serif;
+`;
+
 const Desktop: React.FC<DesktopProps> = ({ children }) => {
   return (
-    <div className="desktop">
-      <div 
-        className="desktop-background"
-        style={{
-          backgroundImage: `url(${ASSET_PATHS.BACKGROUND})`,
-        }}
-      />
-      <div className="desktop-content">
-        {children}
-      </div>
-    </div>
+    <DesktopContainer className="desktop">
+      {children}
+    </DesktopContainer>
   );
 };
 

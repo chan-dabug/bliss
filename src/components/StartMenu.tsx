@@ -1,83 +1,214 @@
 import React from 'react';
-import './StartMenu.css';
+import styled from 'styled-components';
+import { DesktopIcon as DesktopIconType } from '../types';
 
 interface StartMenuProps {
   isOpen: boolean;
   onClose: () => void;
+  desktopIcons: DesktopIconType[];
+  onIconClick: (icon: DesktopIconType) => void;
 }
 
-const StartMenu: React.FC<StartMenuProps> = ({ isOpen, onClose }) => {
+const StartMenuOverlay = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 999;
+`;
+
+const StartMenuContainer = styled.div`
+  position: fixed;
+  bottom: 42px;
+  left: 0;
+  width: 400px;
+  height: 500px;
+  display: flex;
+  border: 1px solid #A0A0A0;
+  border-radius: 4px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  font-family: 'Tahoma', 'Segoe UI', 'Arial', sans-serif;
+  z-index: 1000;
+`;
+
+const LeftPane = styled.div`
+  width: 200px;
+  background: white;
+  border-right: 1px solid #A0A0A0;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+`;
+
+const UserSection = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #E0E0E0;
+`;
+
+const UserAvatar = styled.div`
+  font-size: 32px;
+`;
+
+const UserInfo = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+const UserName = styled.div`
+  font-size: 14px;
+  font-weight: bold;
+  color: #000;
+  margin-bottom: 4px;
+`;
+
+const UserTitle = styled.div`
+  font-size: 11px;
+  color: #666;
+`;
+
+const QuickLinks = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+`;
+
+const QuickLink = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px;
+  cursor: pointer;
+  border-radius: 3px;
+  transition: background-color 0.1s ease;
+  
+  &:hover {
+    background-color: #E6F3FF;
+  }
+`;
+
+const LinkIcon = styled.span`
+  font-size: 16px;
+`;
+
+const LinkText = styled.span`
+  font-size: 12px;
+  color: #0066CC;
+  font-weight: bold;
+`;
+
+const RightPane = styled.div`
+  width: 200px;
+  background: linear-gradient(to bottom, #0066CC 0%, #0052A3 50%, #003D7A 100%);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+`;
+
+const ProgramsHeader = styled.div`
+  color: white;
+  font-size: 12px;
+  font-weight: bold;
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+`;
+
+const ProgramsList = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+`;
+
+const ProgramItem = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 8px;
+  cursor: pointer;
+  border-radius: 3px;
+  transition: background-color 0.1s ease;
+  
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+`;
+
+const ProgramIcon = styled.span`
+  font-size: 14px;
+`;
+
+const ProgramName = styled.span`
+  color: white;
+  font-size: 11px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+`;
+
+const StartMenu: React.FC<StartMenuProps> = ({ 
+  isOpen, 
+  onClose, 
+  desktopIcons, 
+  onIconClick 
+}) => {
   if (!isOpen) return null;
 
+  const handleIconClick = (icon: DesktopIconType) => {
+    onIconClick(icon);
+    onClose();
+  };
+
   return (
-    <div className="start-menu-overlay" onClick={onClose}>
-      <div className="start-menu" onClick={(e) => e.stopPropagation()}>
-        <div className="start-menu-header">
-          <div className="user-info">
-            <div className="user-avatar">👤</div>
-            <div className="user-name">Chan Boswell</div>
-          </div>
-        </div>
-        
-        <div className="start-menu-content">
-          <div className="menu-section">
-            <div className="menu-item">
-              <span className="menu-icon">📁</span>
-              <span className="menu-text">My Documents</span>
-            </div>
-            <div className="menu-item">
-              <span className="menu-icon">🖥️</span>
-              <span className="menu-text">My Computer</span>
-            </div>
-            <div className="menu-item">
-              <span className="menu-icon">🎵</span>
-              <span className="menu-text">Music</span>
-            </div>
-            <div className="menu-item">
-              <span className="menu-icon">🖼️</span>
-              <span className="menu-text">Pictures</span>
-            </div>
-          </div>
+    <StartMenuOverlay onClick={onClose}>
+      <StartMenuContainer onClick={(e) => e.stopPropagation()}>
+        {/* Left Pane - White background with bio */}
+        <LeftPane>
+          <UserSection>
+            <UserAvatar>👤</UserAvatar>
+            <UserInfo>
+              <UserName>Chan Boswell</UserName>
+              <UserTitle>Software Developer</UserTitle>
+            </UserInfo>
+          </UserSection>
           
-          <div className="menu-section">
-            <div className="menu-item">
-              <span className="menu-icon">🌐</span>
-              <span className="menu-text">Internet Explorer</span>
-            </div>
-            <div className="menu-item">
-              <span className="menu-icon">📧</span>
-              <span className="menu-text">Outlook Express</span>
-            </div>
-          </div>
-          
-          <div className="menu-section">
-            <div className="menu-item">
-              <span className="menu-icon">⚙️</span>
-              <span className="menu-text">Control Panel</span>
-            </div>
-            <div className="menu-item">
-              <span className="menu-icon">🔍</span>
-              <span className="menu-text">Search</span>
-            </div>
-            <div className="menu-item">
-              <span className="menu-icon">❓</span>
-              <span className="menu-text">Help and Support</span>
-            </div>
-          </div>
-        </div>
-        
-        <div className="start-menu-footer">
-          <div className="menu-item">
-            <span className="menu-icon">🚪</span>
-            <span className="menu-text">Log Off</span>
-          </div>
-          <div className="menu-item">
-            <span className="menu-icon">⏹️</span>
-            <span className="menu-text">Turn Off Computer</span>
-          </div>
-        </div>
-      </div>
-    </div>
+          <QuickLinks>
+            <QuickLink onClick={() => globalThis.window.open('mailto:chan@example.com', '_blank')}>
+              <LinkIcon>📧</LinkIcon>
+              <LinkText>Email</LinkText>
+            </QuickLink>
+            <QuickLink onClick={() => globalThis.window.open('https://github.com', '_blank')}>
+              <LinkIcon>🐙</LinkIcon>
+              <LinkText>GitHub</LinkText>
+            </QuickLink>
+            <QuickLink onClick={() => globalThis.window.open('https://linkedin.com', '_blank')}>
+              <LinkIcon>💼</LinkIcon>
+              <LinkText>LinkedIn</LinkText>
+            </QuickLink>
+          </QuickLinks>
+        </LeftPane>
+
+        {/* Right Pane - Blue background with program list */}
+        <RightPane>
+          <ProgramsHeader>Programs</ProgramsHeader>
+          <ProgramsList>
+            {desktopIcons.map((icon) => (
+              <ProgramItem 
+                key={icon.id}
+                onClick={() => handleIconClick(icon)}
+              >
+                <ProgramIcon>{icon.type === 'folder' ? '📁' : '⚙️'}</ProgramIcon>
+                <ProgramName>{icon.name}</ProgramName>
+              </ProgramItem>
+            ))}
+          </ProgramsList>
+        </RightPane>
+      </StartMenuContainer>
+    </StartMenuOverlay>
   );
 };
 
