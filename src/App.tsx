@@ -45,6 +45,14 @@ const AppContent: React.FC = () => {
       x: 50,
       y: 260,
       type: 'file'
+    },
+    {
+      id: 'other-projects',
+      name: 'Other Projects',
+      iconPath: ASSET_PATHS.ICONS.MY_PROFILE,
+      x: 50,
+      y: 330,
+      type: 'folder'
     }
   ]);
 

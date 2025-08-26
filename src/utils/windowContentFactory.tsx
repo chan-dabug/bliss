@@ -50,6 +50,52 @@ const createFolderContent = (icon: DesktopIconType): React.ReactNode => {
       </div>
     );
   }
+  
+  if (icon.name === 'Other Projects') {
+    return (
+      <div className="folder-content">
+        <div className="other-projects-content">
+          <h1>📁 Other Projects</h1>
+          <div className="projects-header">
+            <p>Here are some other things I've been working on! Notice a bug 🐛? <a href="https://google.com" target="_blank" rel="noopener noreferrer">File a ticket</a></p>
+          </div>
+          
+          <div className="projects-grid">
+            <div className="project-item">
+              <div className="project-icon">🌐</div>
+              <div className="project-name">Portfolio Website</div>
+              <div className="project-desc">React + TypeScript portfolio</div>
+            </div>
+            <div className="project-item">
+              <div className="project-icon">🎮</div>
+              <div className="project-name">Game Development</div>
+              <div className="project-desc">Unity & C# projects</div>
+            </div>
+            <div className="project-item">
+              <div className="project-icon">📱</div>
+              <div className="project-name">Mobile Apps</div>
+              <div className="project-desc">React Native & Flutter</div>
+            </div>
+            <div className="project-item">
+              <div className="project-icon">🤖</div>
+              <div className="project-name">AI/ML Projects</div>
+              <div className="project-desc">Python & TensorFlow</div>
+            </div>
+            <div className="project-item">
+              <div className="project-icon">💾</div>
+              <div className="project-name">Backend Systems</div>
+              <div className="project-desc">Node.js & Databases</div>
+            </div>
+            <div className="project-item">
+              <div className="project-icon">🎨</div>
+              <div className="project-name">UI/UX Design</div>
+              <div className="project-desc">Figma & Prototyping</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="folder-content">

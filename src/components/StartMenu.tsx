@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { DesktopIcon as DesktopIconType } from '../types';
+import LinkModal from './LinkModal';
 
 interface StartMenuProps {
   isOpen: boolean;
@@ -156,6 +157,8 @@ const StartMenu: React.FC<StartMenuProps> = ({
   desktopIcons, 
   onIconClick 
 }) => {
+  const [linkModalType, setLinkModalType] = useState<'email' | 'github' | 'linkedin' | null>(null);
+
   if (!isOpen) return null;
 
   const handleIconClick = (icon: DesktopIconType) => {
@@ -163,52 +166,69 @@ const StartMenu: React.FC<StartMenuProps> = ({
     onClose();
   };
 
-  return (
-    <StartMenuOverlay onClick={onClose}>
-      <StartMenuContainer onClick={(e) => e.stopPropagation()}>
-        {/* Left Pane - White background with bio */}
-        <LeftPane>
-          <UserSection>
-            <UserAvatar>👤</UserAvatar>
-            <UserInfo>
-              <UserName>Chan Boswell</UserName>
-              <UserTitle>Software Developer</UserTitle>
-            </UserInfo>
-          </UserSection>
-          
-          <QuickLinks>
-            <QuickLink onClick={() => globalThis.window.open('mailto:chan@example.com', '_blank')}>
-              <LinkIcon>📧</LinkIcon>
-              <LinkText>Email</LinkText>
-            </QuickLink>
-            <QuickLink onClick={() => globalThis.window.open('https://github.com', '_blank')}>
-              <LinkIcon>🐙</LinkIcon>
-              <LinkText>GitHub</LinkText>
-            </QuickLink>
-            <QuickLink onClick={() => globalThis.window.open('https://linkedin.com', '_blank')}>
-              <LinkIcon>💼</LinkIcon>
-              <LinkText>LinkedIn</LinkText>
-            </QuickLink>
-          </QuickLinks>
-        </LeftPane>
+  const handleLinkClick = (type: 'email' | 'github' | 'linkedin') => {
+    setLinkModalType(type);
+  };
 
-        {/* Right Pane - Blue background with program list */}
-        <RightPane>
-          <ProgramsHeader>Programs</ProgramsHeader>
-          <ProgramsList>
-            {desktopIcons.map((icon) => (
-              <ProgramItem 
-                key={icon.id}
-                onClick={() => handleIconClick(icon)}
-              >
-                <ProgramIcon>{icon.type === 'folder' ? '📁' : '⚙️'}</ProgramIcon>
-                <ProgramName>{icon.name}</ProgramName>
-              </ProgramItem>
-            ))}
-          </ProgramsList>
-        </RightPane>
-      </StartMenuContainer>
-    </StartMenuOverlay>
+  const handleCloseLinkModal = () => {
+    setLinkModalType(null);
+  };
+
+  return (
+    <>
+      <StartMenuOverlay onClick={onClose}>
+        <StartMenuContainer onClick={(e) => e.stopPropagation()}>
+          {/* Left Pane - White background with bio */}
+          <LeftPane>
+            <UserSection>
+              <UserAvatar>👤</UserAvatar>
+              <UserInfo>
+                <UserName>Chan Boswell</UserName>
+                <UserTitle>Software Developer</UserTitle>
+              </UserInfo>
+            </UserSection>
+            
+            <QuickLinks>
+              <QuickLink onClick={() => handleLinkClick('email')}>
+                <LinkIcon>📧</LinkIcon>
+                <LinkText>Email</LinkText>
+              </QuickLink>
+              <QuickLink onClick={() => handleLinkClick('github')}>
+                <LinkIcon>🐙</LinkIcon>
+                <LinkText>GitHub</LinkText>
+              </QuickLink>
+              <QuickLink onClick={() => handleLinkClick('linkedin')}>
+                <LinkIcon>💼</LinkIcon>
+                <LinkText>LinkedIn</LinkText>
+              </QuickLink>
+            </QuickLinks>
+          </LeftPane>
+
+          {/* Right Pane - Blue background with program list */}
+          <RightPane>
+            <ProgramsHeader>Programs</ProgramsHeader>
+            <ProgramsList>
+              {desktopIcons.map((icon) => (
+                <ProgramItem 
+                  key={icon.id}
+                  onClick={() => handleIconClick(icon)}
+                >
+                  <ProgramIcon>{icon.type === 'folder' ? '📁' : '⚙️'}</ProgramIcon>
+                  <ProgramName>{icon.name}</ProgramName>
+                </ProgramItem>
+              ))}
+            </ProgramsList>
+          </RightPane>
+        </StartMenuContainer>
+      </StartMenuOverlay>
+
+      {/* Link Modal */}
+      <LinkModal 
+        isOpen={linkModalType !== null}
+        onClose={handleCloseLinkModal}
+        type={linkModalType || 'email'}
+      />
+    </>
   );
 };
 

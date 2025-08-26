@@ -108,9 +108,7 @@ const QuickLaunchIcon = styled.div`
   }
 `;
 
-const OtherProjectsFolder = styled.div`
-  font-size: 20px;
-`;
+
 
 const OpenWindows = styled.div`
   flex: 1;
@@ -270,9 +268,7 @@ const Taskbar: React.FC<TaskbarProps> = ({ onStartClick }) => {
 
       {/* Quick Launch Icons */}
       <QuickLaunch>
-        <QuickLaunchIcon title="Other Projects">
-          <OtherProjectsFolder>📁</OtherProjectsFolder>
-        </QuickLaunchIcon>
+        {/* Other Projects moved to desktop */}
       </QuickLaunch>
 
       {/* Open Windows */}

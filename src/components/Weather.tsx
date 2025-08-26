@@ -30,7 +30,7 @@ const WeatherEmoji = styled.div`
 const WeatherDetails = styled.div`
   position: absolute;
   bottom: 100%;
-  left: 50%;
+  right: 10%;
   transform: translateX(-50%);
   background: rgba(0, 0, 0, 0.9);
   color: white;
