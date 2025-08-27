@@ -146,69 +146,68 @@ const createFileContent = (icon: DesktopIconType): React.ReactNode => {
 };
 
 const createAppContent = (icon: DesktopIconType): React.ReactNode => {
-  if (icon.name === "Coder's Playlist") {
-    return (
-      <div className="app-content">
-        <h2>🎵 Coder's Playlist</h2>
-        <p>Curated music for focused coding sessions</p>
-        <div className="playlist-section">
-          <h3>Current Playlist</h3>
-          <div className="playlist-tracks">
-            <div className="track">
-              <span className="track-number">1.</span>
-              <span className="track-title">Lofi Coding Beats</span>
-              <span className="track-artist">Chillhop Music</span>
-            </div>
-            <div className="track">
-              <span className="track-number">2.</span>
-              <span className="track-title">Deep Focus</span>
-              <span className="track-artist">Spotify</span>
-            </div>
-            <div className="track">
-              <span className="track-number">3.</span>
-              <span className="track-title">Programming Flow</span>
-              <span className="track-artist">Brain.fm</span>
-            </div>
-            <div className="track">
-              <span className="track-number">4.</span>
-              <span className="track-title">Code & Coffee</span>
-              <span className="track-artist">Jazz Vibes</span>
-            </div>
-          </div>
-          <div className="playlist-controls">
-            <button className="control-btn">▶️ Play</button>
-            <button className="control-btn">⏸️ Pause</button>
-            <button className="control-btn">⏭️ Next</button>
-          </div>
-        </div>
-      </div>
-    );
-  }
 
   if (icon.name === 'Pinball') {
     return (
-      <div className="app-content">
-        <h2>🎮 Pinball</h2>
-        <p>Classic Windows XP Pinball game</p>
-        <div className="game-section">
-          <div className="game-board">
-            <div className="pinball-table">
-              <div className="bumpers">
-                <div className="bumper bumper-1">⚡</div>
-                <div className="bumper bumper-2">⚡</div>
-                <div className="bumper bumper-3">⚡</div>
-              </div>
-              <div className="flippers">
-                <div className="flipper flipper-left">◀</div>
-                <div className="flipper flipper-right">▶</div>
-              </div>
-              <div className="score">Score: 0</div>
-            </div>
-          </div>
-          <div className="game-controls">
-            <p>Use SPACEBAR to launch ball</p>
-            <p>Use LEFT/RIGHT ARROWS for flippers</p>
-            <button className="control-btn">🎯 New Game</button>
+      <iframe
+        src="http://98.js.org/programs/pinball/space-cadet.html"
+        width="100%"
+        height="100%"
+        style={{
+          border: 'none',
+          borderRadius: '0',
+          display: 'block'
+        }}
+        title="Space Cadet Pinball"
+        allowFullScreen
+      />
+    );
+  }
+
+  if (icon.name === "Coder's Playlist") {
+    return (
+      <div style={{ 
+        padding: '20px', 
+        backgroundColor: '#121212', 
+        height: '100%',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        gap: '20px'
+      }}>
+        <h3 style={{ color: '#1DB954', margin: 0, fontSize: '18px' }}>Spotify</h3>
+        <div style={{ 
+          position: 'relative',
+          width: '100%',
+          height: '352px',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center'
+        }}>
+          <iframe 
+            data-testid="embed-iframe" 
+            style={{borderRadius: '12px'}} 
+            src="https://open.spotify.com/embed/playlist/2ZROl955Vjwl1pZLJdJDbq?utm_source=generator" 
+            width="100%" 
+            height="352" 
+            frameBorder="0" 
+            allowFullScreen
+            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
+            loading="lazy"
+            title="Coder's Playlist - Spotify"
+            onError={(e) => console.error('Spotify iframe failed to load:', e)}
+          />
+          <div style={{
+            position: 'absolute',
+            top: '50%',
+            left: '50%',
+            transform: 'translate(-50%, -50%)',
+            color: '#666',
+            fontSize: '14px',
+            display: 'none'
+          }} id="spotify-loading">
+            Loading Spotify playlist...
           </div>
         </div>
       </div>

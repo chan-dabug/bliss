@@ -9,15 +9,15 @@ interface XpWindowProps {
   onFocus: () => void;
 }
 
-const WindowContainer = styled.div<{ z: number }>`
+const WindowContainer = styled.div<{ z: number; isPinball?: boolean }>`
   position: absolute;
   background: #F0F0F0;
   border: 2px solid #2b579a;
   border-radius: 0;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
   font-family: 'Tahoma', 'Segoe UI', 'Arial', sans-serif;
-  width: 600px;
-  height: 450px;
+  width: ${props => props.isPinball ? '800px' : '600px'};
+  height: ${props => props.isPinball ? '600px' : '450px'};
   overflow: hidden;
   cursor: default;
   z-index: ${props => props.z};
@@ -76,9 +76,8 @@ const TitleBarButton = styled.button<{ variant?: 'close' }>`
 `;
 
 const ContentArea = styled.div`
-  background: white;
-  flex: 1;
-  padding: 20px;
+  background: #C0C0C0;
+  flex: 0;
   overflow: auto;
   height: calc(100% - 22px);
 `;
@@ -154,6 +153,7 @@ const XpWindow: React.FC<XpWindowProps> = ({
         top: position.y,
       }}
       z={window.z}
+      isPinball={window.title === 'Pinball'}
       onMouseDown={handleMouseDown}
     >
       {/* Title Bar */}

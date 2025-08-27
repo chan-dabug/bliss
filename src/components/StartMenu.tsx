@@ -191,7 +191,7 @@ const StartMenu: React.FC<StartMenuProps> = ({
           {/* Left Pane - White background with bio */}
           <LeftPane>
             <UserSection>
-              <UserAvatar>👤</UserAvatar>
+              <UserAvatar>👨🏿‍🔧</UserAvatar>
               <UserInfo>
                 <UserName>Chan Boswell</UserName>
                 <UserTitle>Software Developer</UserTitle>
@@ -206,14 +206,6 @@ const StartMenu: React.FC<StartMenuProps> = ({
               <QuickLink onClick={() => handleLinkClick('email')}>
                 <LinkIcon>📧</LinkIcon>
                 <LinkText>Email</LinkText>
-              </QuickLink>
-              <QuickLink onClick={() => handleLinkClick('github')}>
-                <LinkIcon>🐙</LinkIcon>
-                <LinkText>GitHub</LinkText>
-              </QuickLink>
-              <QuickLink onClick={() => handleLinkClick('linkedin')}>
-                <LinkIcon>💼</LinkIcon>
-                <LinkText>LinkedIn</LinkText>
               </QuickLink>
             </QuickLinks>
           </LeftPane>

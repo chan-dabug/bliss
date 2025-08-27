@@ -23,6 +23,10 @@ export interface WindowState {
   height: number;
   title: string;
   content: React.ReactNode;
+  customSize?: {
+    width: number;
+    height: number;
+  };
 }
 
 export interface TaskbarItem {
