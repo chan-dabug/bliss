@@ -15,7 +15,8 @@ const IconContainer = styled.div<{
   isSelected: boolean; 
   isDragging: boolean; 
   x: number; 
-  y: number; 
+  y: number;
+
 }>`
   position: absolute;
   left: ${props => props.x}px;
@@ -57,7 +58,7 @@ const IconImage = styled.div`
 `;
 
 const IconText = styled.div`
-  font-size: 11px;
+  font-size: 9px;
   color: white;
   text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.8);
   line-height: 1.2;

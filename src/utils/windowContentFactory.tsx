@@ -51,7 +51,7 @@ const createFolderContent = (icon: DesktopIconType): React.ReactNode => {
     );
   }
   
-  if (icon.name === 'Other Projects') {
+  if (icon.name === 'Projects') {
     return (
       <div className="folder-content">
         <div className="other-projects-content">
@@ -121,36 +121,21 @@ const createFolderContent = (icon: DesktopIconType): React.ReactNode => {
 };
 
 const createFileContent = (icon: DesktopIconType): React.ReactNode => {
-  if (icon.name.toLowerCase().includes('resume')) {
-    return (
-      <div className="resume-content">
-        <h1>Chan Boswell</h1>
-        <h2>Software Developer</h2>
-        <p>Welcome to my Windows XP-themed portfolio!</p>
-        <p>This is a creative way to showcase my skills in React, TypeScript, and CSS.</p>
-        <div className="resume-section">
-          <h3>Skills</h3>
-          <ul>
-            <li>React & TypeScript</li>
-            <li>Node.js & Express</li>
-            <li>CSS & Styling</li>
-            <li>UI/UX Design</li>
-          </ul>
-        </div>
-        <div className="resume-section">
-          <h3>Experience</h3>
-          <p>Building nostalgic and creative web experiences</p>
-        </div>
-        <div className="resume-section">
-          <h3>Contact</h3>
-          <p>Email: chan@example.com</p>
-          <p>GitHub: github.com/chanboswell</p>
-          <p>LinkedIn: linkedin.com/in/chanboswell</p>
-        </div>
-      </div>
-    );
+  // Check if this file should use the PDF viewer (any PDF or "resume" file)
+  const isPdf = icon.meta?.mime === 'application/pdf'
+    || (icon.meta?.fileUrl?.toLowerCase().endsWith('.pdf') ?? false);
+
+  const looksLikeResume =
+    icon.name.toLowerCase().includes('resume') ||
+    icon.meta?.fileUrl?.toLowerCase().includes('resume') === true;
+
+    if (isPdf || looksLikeResume) {
+    // For resume/PDF files, we want to show them directly without the XP window wrapper
+    // This will be handled specially in the App component
+    return null;
   }
-  
+
+  // non-PDF files
   return (
     <div className="file-content">
       <h2>{icon.name}</h2>

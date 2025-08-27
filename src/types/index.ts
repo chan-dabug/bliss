@@ -6,6 +6,10 @@ export interface DesktopIcon {
   y: number;
   type: 'app' | 'folder' | 'file';
   action?: () => void;
+  meta?: {
+    fileUrl?: string;   // e.g. "/ChanBoswellResume.pdf"
+    mime?: string;      // e.g. "application/pdf"
+  };
 }
 
 export interface WindowState {

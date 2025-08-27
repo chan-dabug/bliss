@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { DesktopIcon as DesktopIconType } from '../types';
 import LinkModal from './LinkModal';
+import WelcomeModal from './WelcomeModal';
 
 interface StartMenuProps {
   isOpen: boolean;
@@ -158,6 +159,7 @@ const StartMenu: React.FC<StartMenuProps> = ({
   onIconClick 
 }) => {
   const [linkModalType, setLinkModalType] = useState<'email' | 'github' | 'linkedin' | null>(null);
+  const [showWelcomeModal, setShowWelcomeModal] = useState(false);
 
   if (!isOpen) return null;
 
@@ -172,6 +174,14 @@ const StartMenu: React.FC<StartMenuProps> = ({
 
   const handleCloseLinkModal = () => {
     setLinkModalType(null);
+  };
+
+  const handleWelcomeClick = () => {
+    setShowWelcomeModal(true);
+  };
+
+  const handleCloseWelcomeModal = () => {
+    setShowWelcomeModal(false);
   };
 
   return (
@@ -189,6 +199,10 @@ const StartMenu: React.FC<StartMenuProps> = ({
             </UserSection>
             
             <QuickLinks>
+              <QuickLink onClick={handleWelcomeClick}>
+                <LinkIcon>👋</LinkIcon>
+                <LinkText>Welcome</LinkText>
+              </QuickLink>
               <QuickLink onClick={() => handleLinkClick('email')}>
                 <LinkIcon>📧</LinkIcon>
                 <LinkText>Email</LinkText>
@@ -227,6 +241,12 @@ const StartMenu: React.FC<StartMenuProps> = ({
         isOpen={linkModalType !== null}
         onClose={handleCloseLinkModal}
         type={linkModalType || 'email'}
+      />
+
+      {/* Welcome Modal */}
+      <WelcomeModal 
+        isOpen={showWelcomeModal}
+        onClose={handleCloseWelcomeModal}
       />
     </>
   );
