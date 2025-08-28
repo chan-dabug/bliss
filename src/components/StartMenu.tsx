@@ -9,6 +9,7 @@ interface StartMenuProps {
   onClose: () => void;
   desktopIcons: DesktopIconType[];
   onIconClick: (icon: DesktopIconType) => void;
+  onLinkClick: (type: 'email' | 'github' | 'linkedin') => void;
 }
 
 const StartMenuOverlay = styled.div`
@@ -156,9 +157,9 @@ const StartMenu: React.FC<StartMenuProps> = ({
   isOpen, 
   onClose, 
   desktopIcons, 
-  onIconClick 
+  onIconClick,
+  onLinkClick
 }) => {
-  const [linkModalType, setLinkModalType] = useState<'email' | 'github' | 'linkedin' | null>(null);
   const [showWelcomeModal, setShowWelcomeModal] = useState(false);
 
   if (!isOpen) return null;
@@ -169,11 +170,9 @@ const StartMenu: React.FC<StartMenuProps> = ({
   };
 
   const handleLinkClick = (type: 'email' | 'github' | 'linkedin') => {
-    setLinkModalType(type);
-  };
-
-  const handleCloseLinkModal = () => {
-    setLinkModalType(null);
+    console.log('StartMenu: handleLinkClick called with type:', type);
+    onLinkClick(type);
+    onClose();
   };
 
   const handleWelcomeClick = () => {
@@ -227,13 +226,6 @@ const StartMenu: React.FC<StartMenuProps> = ({
           </RightPane>
         </StartMenuContainer>
       </StartMenuOverlay>
-
-      {/* Link Modal */}
-      <LinkModal 
-        isOpen={linkModalType !== null}
-        onClose={handleCloseLinkModal}
-        type={linkModalType || 'email'}
-      />
 
       {/* Welcome Modal */}
       <WelcomeModal 

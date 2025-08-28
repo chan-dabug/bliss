@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Email } from './Email';
 
 interface LinkModalProps {
   isOpen: boolean;
@@ -74,65 +75,6 @@ const ModalContent = styled.div`
   overflow-y: auto;
 `;
 
-const EmailContent = styled.div`
-  text-align: center;
-  
-  h2 {
-    color: #0066CC;
-    margin-bottom: 20px;
-  }
-  
-  .email-form {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    max-width: 400px;
-    margin: 0 auto;
-  }
-  
-  .form-group {
-    text-align: left;
-  }
-  
-  .form-group label {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: bold;
-    color: #333;
-  }
-  
-  .form-group input,
-  .form-group textarea {
-    width: 100%;
-    padding: 8px;
-    border: 1px solid #A0A0A0;
-    border-radius: 3px;
-    font-family: 'Tahoma', 'Segoe UI', 'Arial', sans-serif;
-    font-size: 12px;
-  }
-  
-  .form-group textarea {
-    height: 100px;
-    resize: vertical;
-  }
-  
-  .send-button {
-    background: #0066CC;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 3px;
-    cursor: pointer;
-    font-weight: bold;
-    font-size: 12px;
-    transition: background-color 0.1s ease;
-    
-    &:hover {
-      background: #0052A3;
-    }
-  }
-`;
-
 const GitHubContent = styled.div`
   text-align: center;
   
@@ -166,26 +108,7 @@ const GitHubContent = styled.div`
   .stat-label {
     font-size: 12px;
     color: #666;
-  }
-  
-  .github-links {
-    margin-top: 20px;
-  }
-  
-  .github-link {
-    display: inline-block;
-    background: #333;
-    color: white;
-    text-decoration: none;
-    padding: 8px 16px;
-    border-radius: 3px;
-    margin: 5px;
-    font-size: 12px;
-    transition: background-color 0.1s ease;
-    
-    &:hover {
-      background: #555;
-    }
+    line-height: 1.3;
   }
 `;
 
@@ -197,76 +120,23 @@ const LinkedInContent = styled.div`
     margin-bottom: 20px;
   }
   
-  .profile-section {
+  .linkedin-info {
     background: white;
     border: 1px solid #E0E0E0;
     border-radius: 4px;
     padding: 20px;
-    margin-bottom: 20px;
-    text-align: left;
+    margin: 20px 0;
   }
   
-  .profile-header {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    margin-bottom: 20px;
-  }
-  
-  .profile-avatar {
-    width: 60px;
-    height: 60px;
-    background: #0077B5;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    font-size: 24px;
-  }
-  
-  .profile-info h3 {
-    color: #333;
-    margin-bottom: 5px;
-  }
-  
-  .profile-info p {
-    color: #666;
-    font-size: 12px;
-    margin: 0;
-  }
-  
-  .skills-section {
-    margin-top: 20px;
-  }
-  
-  .skills-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-    gap: 10px;
-    margin-top: 15px;
-  }
-  
-  .skill-tag {
-    background: #E8F4FD;
-    color: #0077B5;
-    padding: 5px 10px;
-    border-radius: 15px;
-    font-size: 11px;
-    text-align: center;
-    border: 1px solid #B3D9F2;
-  }
-  
-  .connect-button {
+  .profile-link {
+    display: inline-block;
     background: #0077B5;
     color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 3px;
-    cursor: pointer;
+    text-decoration: none;
+    padding: 12px 24px;
+    border-radius: 4px;
     font-weight: bold;
-    font-size: 12px;
-    margin-top: 20px;
+    margin-top: 15px;
     transition: background-color 0.1s ease;
     
     &:hover {
@@ -274,67 +144,9 @@ const LinkedInContent = styled.div`
     }
   }
   
-  .experience-item,
-  .education-item {
-    background: white;
-    border: 1px solid #E0E0E0;
-    border-radius: 4px;
-    padding: 15px;
-    margin-bottom: 15px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-  }
-  
-  .exp-header {
-    margin-bottom: 10px;
-  }
-  
-  .exp-title {
-    font-size: 14px;
-    font-weight: bold;
-    color: #0077B5;
-    margin-bottom: 4px;
-  }
-  
-  .exp-company {
-    font-size: 12px;
-    color: #333;
-    font-weight: 500;
-    margin-bottom: 2px;
-  }
-  
-  .exp-duration {
-    font-size: 11px;
+  .profile-description {
     color: #666;
-    font-style: italic;
-  }
-  
-  .exp-description {
-    font-size: 11px;
-    color: #555;
-    line-height: 1.4;
-  }
-  
-  .education-item {
-    text-align: center;
-  }
-  
-  .edu-degree {
-    font-size: 13px;
-    font-weight: bold;
-    color: #0077B5;
-    margin-bottom: 5px;
-  }
-  
-  .edu-school {
-    font-size: 12px;
-    color: #333;
-    margin-bottom: 3px;
-  }
-  
-  .edu-year {
-    font-size: 11px;
-    color: #666;
-    font-style: italic;
+    line-height: 1.3;
   }
 `;
 
@@ -347,34 +159,27 @@ const OtherProjectsContent = styled.div`
   }
   
   .projects-header {
-    background: white;
-    border: 1px solid #E0E0E0;
-    border-radius: 4px;
-    padding: 15px;
     margin-bottom: 20px;
-    text-align: center;
-  }
-  
-  .projects-header p {
-    margin: 0;
-    font-size: 12px;
-    color: #333;
-  }
-  
-  .projects-header a {
-    color: #0066CC;
-    text-decoration: none;
-    font-weight: bold;
-  }
-  
-  .projects-header a:hover {
-    text-decoration: underline;
+    
+    p {
+      color: #666;
+      line-height: 1.3;
+    }
+    
+    a {
+      color: #0066CC;
+      text-decoration: none;
+      
+      &:hover {
+        text-decoration: underline;
+      }
+    }
   }
   
   .projects-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    gap: 15px;
+    gap: 20px;
     margin-top: 20px;
   }
   
@@ -382,15 +187,14 @@ const OtherProjectsContent = styled.div`
     background: white;
     border: 1px solid #E0E0E0;
     border-radius: 4px;
-    padding: 15px;
+    padding: 20px;
     text-align: center;
-    transition: transform 0.1s ease, box-shadow 0.1s ease;
-    cursor: pointer;
-  }
-  
-  .project-item:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.1s ease;
+    
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
   }
   
   .project-icon {
@@ -417,26 +221,50 @@ const LinkModal: React.FC<LinkModalProps> = ({ isOpen, onClose, type }) => {
 
   const renderContent = () => {
     switch (type) {
-      case 'email':
+      case 'github':
         return (
-          <EmailContent>
-            <h2>📧 Send Email</h2>
-            <div className="email-form">
-              <div className="form-group">
-                <label>From:</label>
-                <input type="email" placeholder="your.email@example.com" />
+          <GitHubContent>
+            <h2>🐙 GitHub</h2>
+            <div className="github-stats">
+              <div className="stat-card">
+                <div className="stat-number">50+</div>
+                <div className="stat-label">Repositories</div>
               </div>
-              <div className="form-group">
-                <label>Subject:</label>
-                <input type="text" placeholder="Message subject" />
+              <div className="stat-card">
+                <div className="stat-number">100+</div>
+                <div className="stat-label">Contributions</div>
               </div>
-              <div className="form-group">
-                <label>Message:</label>
-                <textarea placeholder="Type your message here..."></textarea>
-              </div>
-              <button className="send-button">Send Email</button>
             </div>
-          </EmailContent>
+            <a 
+              href="https://github.com/chanboswell" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="profile-link"
+            >
+              View Profile
+            </a>
+          </GitHubContent>
+        );
+      
+      case 'linkedin':
+        return (
+          <LinkedInContent>
+            <h2>💼 LinkedIn</h2>
+            <div className="linkedin-info">
+              <p className="profile-description">
+                Connect with me on LinkedIn to see my professional experience, 
+                skills, and network with other developers and tech professionals.
+              </p>
+              <a 
+                href="https://linkedin.com/in/chanboswell" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="profile-link"
+              >
+                Connect on LinkedIn
+              </a>
+            </div>
+          </LinkedInContent>
         );
       
       case 'other-projects':
@@ -487,15 +315,19 @@ const LinkModal: React.FC<LinkModalProps> = ({ isOpen, onClose, type }) => {
     }
   };
 
+  // Special case for email - render directly without modal wrapper
+  if (type === 'email') {
+    return <Email onClose={onClose} />;
+  }
+
   return (
     <ModalOverlay onClick={onClose}>
       <ModalContainer onClick={(e) => e.stopPropagation()}>
         <ModalTitleBar>
           <TitleText>
-            {type === 'email' && '📧 Email'}
-            {type === 'github' && '🐙 GitHub'}
-            {type === 'linkedin' && '💼 LinkedIn'}
-            {type === 'other-projects' && '📁 Other Projects'}
+            {type === 'github' && 'GitHub'}
+            {type === 'linkedin' && 'LinkedIn'}
+            {type === 'other-projects' && 'Other Projects'}
           </TitleText>
           <CloseButton onClick={onClose}>✕</CloseButton>
         </ModalTitleBar>
