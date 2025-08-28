@@ -189,10 +189,9 @@ const AppContent: React.FC = () => {
   }, []);
 
   const handleStartMenuIconClick = useCallback((icon: DesktopIconType) => {
-    // Open window using the window manager
-    const content = createWindowContent(icon);
-    open(icon.id, icon.name, content);
-  }, []); // Remove open dependency
+    // Use the same logic as handleIconClick for consistency
+    handleIconClick(icon);
+  }, [handleIconClick]);
 
   return (
     <div className="App">
