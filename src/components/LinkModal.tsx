@@ -444,7 +444,7 @@ const LinkModal: React.FC<LinkModalProps> = ({ isOpen, onClose, type }) => {
           <OtherProjectsContent>
             <h2>📁 Other Projects</h2>
             <div className="projects-header">
-              <p>Here are some other things I've been working on! Notice a bug 🐛? <a href="https://google.com" target="_blank" rel="noopener noreferrer">File a ticket</a></p>
+              <p>Here are some other things I've been working on! Notice a bug 🐛? <a href="https://id.atlassian.com/invite/p/jira-software?id=WZKdkLmzQluvNQsttPZeCw" target="_blank" rel="noopener noreferrer">File a ticket</a></p>
             </div>
             
             <div className="projects-grid">

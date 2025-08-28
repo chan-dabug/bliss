@@ -57,7 +57,7 @@ const createFolderContent = (icon: DesktopIconType): React.ReactNode => {
         <div className="other-projects-content">
           <h1>📁 Other Projects</h1>
           <div className="projects-header">
-            <p>Here are some other things I've been working on! Notice a bug 🐛? <a href="https://google.com" target="_blank" rel="noopener noreferrer">File a ticket</a></p>
+            <p>Here are some other things I've been working on! Notice a bug 🐛? <a href="https://id.atlassian.com/invite/p/jira-software?id=WZKdkLmzQluvNQsttPZeCw" target="_blank" rel="noopener noreferrer">File a ticket</a></p>
           </div>
           
           <div className="projects-grid">
