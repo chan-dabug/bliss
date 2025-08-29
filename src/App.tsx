@@ -7,7 +7,6 @@ import Taskbar from './components/Taskbar';
 import StartMenu from './components/StartMenu';
 import WelcomeModal from './components/WelcomeModal';
 import WindowLayer from './components/WindowLayer';
-import LinkModal from './components/LinkModal';
 import { DesktopIcon as DesktopIconType } from './types';
 import { ASSET_PATHS, APP_NAMES } from './constants';
 import { createWindowContent } from './utils/windowContentFactory';
@@ -57,7 +56,6 @@ const AppContent: React.FC = () => {
   const [selectedIcon, setSelectedIcon] = useState<string | null>(null);
   const [isStartMenuOpen, setIsStartMenuOpen] = useState(false);
   const [showWelcomeModal, setShowWelcomeModal] = useState(false);
-  const [linkModalType, setLinkModalType] = useState<'email' | 'github' | 'linkedin' | null>(null);
 
   // Show welcome modal on initial load
   useEffect(() => {
@@ -190,14 +188,7 @@ const AppContent: React.FC = () => {
     setShowWelcomeModal(false);
   }, []);
 
-  const handleLinkClick = useCallback((type: 'email' | 'github' | 'linkedin') => {
-    console.log('App: handleLinkClick called with type:', type);
-    setLinkModalType(type);
-  }, []);
 
-  const handleCloseLinkModal = useCallback(() => {
-    setLinkModalType(null);
-  }, []);
 
   const handleStartMenuIconClick = useCallback((icon: DesktopIconType) => {
     // Use the same logic as handleIconClick for consistency
@@ -233,7 +224,6 @@ const AppContent: React.FC = () => {
           onClose={() => setIsStartMenuOpen(false)}
           desktopIcons={desktopIcons}
           onIconClick={handleStartMenuIconClick}
-          onLinkClick={handleLinkClick}
         />
       </Desktop>
 
@@ -242,15 +232,6 @@ const AppContent: React.FC = () => {
         isOpen={showWelcomeModal}
         onClose={handleCloseWelcomeModal}
       />
-
-      {/* Link Modal - Outside Desktop component for proper overlay */}
-      {linkModalType && (
-        <LinkModal 
-          isOpen={true}
-          onClose={handleCloseLinkModal}
-          type={linkModalType}
-        />
-      )}
     </div>
   );
 };

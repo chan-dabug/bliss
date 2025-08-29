@@ -1,11 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Email } from './Email';
 
 interface LinkModalProps {
   isOpen: boolean;
   onClose: () => void;
-  type: 'email' | 'github' | 'linkedin' | 'other-projects';
+  type: 'github' | 'linkedin' | 'other-projects';
 }
 
 const ModalOverlay = styled.div`
@@ -315,10 +314,7 @@ const LinkModal: React.FC<LinkModalProps> = ({ isOpen, onClose, type }) => {
     }
   };
 
-  // Special case for email - render directly without modal wrapper
-  if (type === 'email') {
-    return <Email onClose={onClose} />;
-  }
+
 
   return (
     <ModalOverlay onClick={onClose}>

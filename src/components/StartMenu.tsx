@@ -1,15 +1,14 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { DesktopIcon as DesktopIconType } from '../types';
-import LinkModal from './LinkModal';
 import WelcomeModal from './WelcomeModal';
+import ContactModal from './ContactModal';
 
 interface StartMenuProps {
   isOpen: boolean;
   onClose: () => void;
   desktopIcons: DesktopIconType[];
   onIconClick: (icon: DesktopIconType) => void;
-  onLinkClick: (type: 'email' | 'github' | 'linkedin') => void;
 }
 
 const StartMenuOverlay = styled.div`
@@ -157,10 +156,10 @@ const StartMenu: React.FC<StartMenuProps> = ({
   isOpen, 
   onClose, 
   desktopIcons, 
-  onIconClick,
-  onLinkClick
+  onIconClick
 }) => {
   const [showWelcomeModal, setShowWelcomeModal] = useState(false);
+  const [showContactModal, setShowContactModal] = useState(false);
 
   if (!isOpen) return null;
 
@@ -169,9 +168,8 @@ const StartMenu: React.FC<StartMenuProps> = ({
     onClose();
   };
 
-  const handleLinkClick = (type: 'email' | 'github' | 'linkedin') => {
-    console.log('StartMenu: handleLinkClick called with type:', type);
-    onLinkClick(type);
+  const handleContactClick = () => {
+    setShowContactModal(true);
     onClose();
   };
 
@@ -202,9 +200,9 @@ const StartMenu: React.FC<StartMenuProps> = ({
                 <LinkIcon>👋</LinkIcon>
                 <LinkText>Welcome</LinkText>
               </QuickLink>
-              <QuickLink onClick={() => handleLinkClick('email')}>
+              <QuickLink onClick={handleContactClick}>
                 <LinkIcon>📧</LinkIcon>
-                <LinkText>Email</LinkText>
+                <LinkText>Contact</LinkText>
               </QuickLink>
             </QuickLinks>
           </LeftPane>
@@ -231,6 +229,12 @@ const StartMenu: React.FC<StartMenuProps> = ({
       <WelcomeModal 
         isOpen={showWelcomeModal}
         onClose={handleCloseWelcomeModal}
+      />
+
+      {/* Contact Modal */}
+      <ContactModal 
+        isOpen={showContactModal}
+        onClose={() => setShowContactModal(false)}
       />
     </>
   );
