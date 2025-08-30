@@ -88,7 +88,7 @@ const DesktopIcon: React.FC<DesktopIconProps> = ({
         console.error('Failed to load icon position:', error);
       }
     }
-  }, [icon.id]); // Remove onMove dependency
+  }, [icon.id, onMove]);
 
   useEffect(() => {
     if (!isDragging) return;
@@ -131,7 +131,7 @@ const DesktopIcon: React.FC<DesktopIconProps> = ({
       document.removeEventListener('mousemove', handleMouseMove);
       document.removeEventListener('mouseup', handleMouseUp);
     };
-  }, [isDragging, icon.id]); // Remove onMove dependency
+  }, [isDragging, icon.id, onMove]);
 
   const handleMouseDown = (e: React.MouseEvent) => {
     e.preventDefault();

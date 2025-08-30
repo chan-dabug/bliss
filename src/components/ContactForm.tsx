@@ -137,15 +137,7 @@ export default function ContactForm({ onClose }: ContactFormProps) {
   const SERVICE_ID = 'service_asgma6f';
   const TEMPLATE_IDS = ['template_piwuaz9', 'template_13lsdyg'] as const;
 
-  // Parallel email sending to multiple templates
-  const handleEmailTemplateParallel = async (
-    serviceId: string,
-    templateIds: readonly string[],
-    formEl: HTMLFormElement
-  ) => {
-    // Fire both sends at once
-    return Promise.all(templateIds.map(id => emailjs.sendForm(serviceId, id, formEl)));
-  };
+
 
   // Safer variant that doesn't cancel other sends on failure
   const handleEmailTemplateParallelSafe = async (

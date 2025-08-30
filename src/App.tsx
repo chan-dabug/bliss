@@ -178,7 +178,7 @@ const AppContent: React.FC = () => {
     // Regular handling for other icons - open window using the window manager
     const content = createWindowContent(icon);
     open(icon.id, icon.name, content);
-  }, []); // Remove open dependency
+  }, [open]);
 
   const handleStartClick = useCallback(() => {
     setIsStartMenuOpen(prev => !prev);

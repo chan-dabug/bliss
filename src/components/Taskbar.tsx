@@ -93,20 +93,7 @@ const QuickLaunch = styled.div`
   margin-left: 8px;
 `;
 
-const QuickLaunchIcon = styled.div`
-  width: 32px;
-  height: 32px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  border-radius: 3px;
-  transition: background-color 0.1s ease;
-  
-  &:hover {
-    background-color: rgba(255, 255, 255, 0.1);
-  }
-`;
+
 
 
 
