@@ -140,7 +140,7 @@ const createAppContent = (icon: DesktopIconType): React.ReactNode => {
   if (icon.name === 'Pinball') {
     return (
       <iframe
-        src="http://98.js.org/programs/pinball/space-cadet.html"
+        src="https://98.js.org/programs/pinball/space-cadet.html"
         width="100%"
         height="100%"
         style={{

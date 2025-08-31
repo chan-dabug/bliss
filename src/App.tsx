@@ -7,6 +7,7 @@ import Taskbar from './components/Taskbar';
 import StartMenu from './components/StartMenu';
 import WelcomeModal from './components/WelcomeModal';
 import WindowLayer from './components/WindowLayer';
+import ContactModal from './components/ContactModal';
 import { DesktopIcon as DesktopIconType } from './types';
 import { ASSET_PATHS, APP_NAMES } from './constants';
 import { createWindowContent } from './utils/windowContentFactory';
@@ -56,6 +57,7 @@ const AppContent: React.FC = () => {
   const [selectedIcon, setSelectedIcon] = useState<string | null>(null);
   const [isStartMenuOpen, setIsStartMenuOpen] = useState(false);
   const [showWelcomeModal, setShowWelcomeModal] = useState(false);
+  const [showContactModal, setShowContactModal] = useState(false);
 
   // Show welcome modal on initial load
   useEffect(() => {
@@ -188,6 +190,14 @@ const AppContent: React.FC = () => {
     setShowWelcomeModal(false);
   }, []);
 
+  const handleContactClick = useCallback(() => {
+    setShowContactModal(true);
+  }, []);
+
+  const handleCloseContactModal = useCallback(() => {
+    setShowContactModal(false);
+  }, []);
+
 
 
   const handleStartMenuIconClick = useCallback((icon: DesktopIconType) => {
@@ -224,6 +234,7 @@ const AppContent: React.FC = () => {
           onClose={() => setIsStartMenuOpen(false)}
           desktopIcons={desktopIcons}
           onIconClick={handleStartMenuIconClick}
+          onContactClick={handleContactClick}
         />
       </Desktop>
 
@@ -231,6 +242,12 @@ const AppContent: React.FC = () => {
       <WelcomeModal 
         isOpen={showWelcomeModal}
         onClose={handleCloseWelcomeModal}
+      />
+
+      {/* Contact Modal - Outside Desktop component for proper overlay */}
+      <ContactModal 
+        isOpen={showContactModal}
+        onClose={handleCloseContactModal}
       />
     </div>
   );

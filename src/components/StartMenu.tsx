@@ -2,13 +2,13 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { DesktopIcon as DesktopIconType } from '../types';
 import WelcomeModal from './WelcomeModal';
-import ContactModal from './ContactModal';
 
 interface StartMenuProps {
   isOpen: boolean;
   onClose: () => void;
   desktopIcons: DesktopIconType[];
   onIconClick: (icon: DesktopIconType) => void;
+  onContactClick: () => void;
 }
 
 const StartMenuOverlay = styled.div`
@@ -156,10 +156,10 @@ const StartMenu: React.FC<StartMenuProps> = ({
   isOpen, 
   onClose, 
   desktopIcons, 
-  onIconClick
+  onIconClick,
+  onContactClick
 }) => {
   const [showWelcomeModal, setShowWelcomeModal] = useState(false);
-  const [showContactModal, setShowContactModal] = useState(false);
 
   if (!isOpen) return null;
 
@@ -169,7 +169,7 @@ const StartMenu: React.FC<StartMenuProps> = ({
   };
 
   const handleContactClick = () => {
-    setShowContactModal(true);
+    onContactClick();
     onClose();
   };
 
@@ -229,12 +229,6 @@ const StartMenu: React.FC<StartMenuProps> = ({
       <WelcomeModal 
         isOpen={showWelcomeModal}
         onClose={handleCloseWelcomeModal}
-      />
-
-      {/* Contact Modal */}
-      <ContactModal 
-        isOpen={showContactModal}
-        onClose={() => setShowContactModal(false)}
       />
     </>
   );
