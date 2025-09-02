@@ -59,6 +59,7 @@ export function SilentEmbed(props: SilentProps) {
       <iframe
         {...rest}
         src={src}
+        title="YouTube Video Player"
         allow="autoplay; encrypted-media; fullscreen; picture-in-picture"
         referrerPolicy="no-referrer-when-downgrade"
       />
@@ -77,6 +78,7 @@ export function SilentEmbed(props: SilentProps) {
       <iframe
         {...rest}
         src={src}
+        title="Vimeo Video Player"
         allow="autoplay; encrypted-media; fullscreen; picture-in-picture"
         referrerPolicy="no-referrer-when-downgrade"
       />
@@ -84,12 +86,13 @@ export function SilentEmbed(props: SilentProps) {
   }
 
   // generic iframe: you cannot force mute cross-origin.
-  // We *block autoplay* via permission policy so it won’t start blasting.
+  // We *block autoplay* via permission policy so it won't start blasting.
   if (props.kind === "iframe") {
     const { kind, ...rest } = props;
     return (
       <iframe
         {...rest}
+        title="Embedded Content"
         // Block autoplay entirely inside the frame. (Stricter than just omitting it.)
         // Works in modern Chromium/Firefox: prevents auto-start audio.
         allow="fullscreen; picture-in-picture; autoplay 'none'"
@@ -107,6 +110,7 @@ export function SilentEmbedIframe(p: React.ComponentPropsWithoutRef<'iframe'>) {
     return (
       <iframe
         {...rest}
+        title="Embedded Content"
         // prevent any auto-starting audio/video
         allow="fullscreen; picture-in-picture; autoplay 'none'"
         // optional extra hardening:
