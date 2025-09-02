@@ -120,6 +120,8 @@ const NoteText = styled.div`
 `;
 
 const WelcomeModal: React.FC<WelcomeModalProps> = ({ isOpen, onClose }) => {
+  const [imageLoaded, setImageLoaded] = React.useState(false);
+  
   if (!isOpen) return null;
 
   return (
@@ -131,13 +133,33 @@ const WelcomeModal: React.FC<WelcomeModalProps> = ({ isOpen, onClose }) => {
         </TitleBar>
         
         <ContentArea>
+          {!imageLoaded && (
+            <div style={{
+              width: '100%',
+              maxWidth: '400px',
+              height: '300px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              margin: '0 auto 20px auto',
+              backgroundColor: '#f0f0f0',
+              borderRadius: '8px',
+              color: '#666',
+              fontSize: '14px'
+            }}>
+              Loading image...
+            </div>
+          )}
           <WelcomeImage 
-            src="/ItMe.png" 
+            src="/ItMe.webp" 
             alt="Chan Boswell - Open to Work"
+            style={{ display: imageLoaded ? 'block' : 'none' }}
+            onLoad={() => setImageLoaded(true)}
             onError={(e) => {
-              // Fallback if image fails to load
+              // If WebP fails to load, hide the image
               const target = e.target as HTMLImageElement;
               target.style.display = 'none';
+              setImageLoaded(true);
             }}
           />
           

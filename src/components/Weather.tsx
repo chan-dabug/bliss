@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 
 interface WeatherData {
@@ -70,9 +70,10 @@ const WeatherCondition = styled.div`
 
 const Weather: React.FC = () => {
   const [weather, setWeather] = useState<WeatherData | null>(null);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [showDetails, setShowDetails] = useState(false);
+  const [locationRequested, setLocationRequested] = useState(false);
 
   // Weather condition to emoji mapping
   const getWeatherEmoji = (condition: string): string => {
@@ -89,69 +90,71 @@ const Weather: React.FC = () => {
     return '🌤️'; // default
   };
 
-  useEffect(() => {
-    const getWeather = async () => {
-      try {
-        // Get user's location
-        const position = await new Promise<GeolocationPosition>((resolve, reject) => {
-          navigator.geolocation.getCurrentPosition(resolve, reject, {
-            enableHighAccuracy: true,
-            timeout: 10000,
-            maximumAge: 60000
-          });
+  const getWeather = async () => {
+    if (locationRequested) return; // Prevent multiple requests
+    
+    setLoading(true);
+    setError(null);
+    setLocationRequested(true);
+    
+    try {
+      // Get user's location
+      const position = await new Promise<GeolocationPosition>((resolve, reject) => {
+        navigator.geolocation.getCurrentPosition(resolve, reject, {
+          enableHighAccuracy: true,
+          timeout: 10000,
+          maximumAge: 60000
         });
+      });
 
-        const { latitude, longitude } = position.coords;
+      const { latitude, longitude } = position.coords;
 
-        // Call OpenWeatherMap API (free tier)
-        const apiKey = 'dcf99a0b1b9d737043ca8776f23b0ce3'; // You'll need to get a free API key from openweathermap.org
-        const response = await fetch(
-          `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=imperial`
-        );
+      // Call OpenWeatherMap API (free tier)
+      const apiKey = 'dcf99a0b1b9d737043ca8776f23b0ce3'; // You'll need to get a free API key from openweathermap.org
+      const response = await fetch(
+        `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=imperial`
+      );
 
-        if (!response.ok) {
-          throw new Error('Weather API request failed');
-        }
-
-        const data = await response.json();
-        
-        // Get city name from reverse geocoding
-        const geoResponse = await fetch(
-          `https://api.openweathermap.org/geo/1.0/reverse?lat=${latitude}&lon=${longitude}&limit=1&appid=${apiKey}`
-        );
-        
-        let cityName = 'Unknown Location';
-        if (geoResponse.ok) {
-          const geoData = await geoResponse.json();
-          if (geoData.length > 0) {
-            cityName = geoData[0].name;
-          }
-        }
-
-        setWeather({
-          temperature: Math.round(data.main.temp),
-          condition: data.weather[0].main,
-          location: cityName,
-          emoji: getWeatherEmoji(data.weather[0].main)
-        });
-      } catch (err) {
-        console.error('Weather fetch error:', err);
-        setError('Weather unavailable');
-        
-        // Fallback weather data for demo purposes
-        setWeather({
-          temperature: 72,
-          condition: 'Clear',
-          location: 'San Francisco, CA',
-          emoji: '☀️'
-        });
-      } finally {
-        setLoading(false);
+      if (!response.ok) {
+        throw new Error('Weather API request failed');
       }
-    };
 
-    getWeather();
-  }, []);
+      const data = await response.json();
+      
+      // Get city name from reverse geocoding
+      const geoResponse = await fetch(
+        `https://api.openweathermap.org/geo/1.0/reverse?lat=${latitude}&lon=${longitude}&limit=1&appid=${apiKey}`
+      );
+      
+      let cityName = 'Unknown Location';
+      if (geoResponse.ok) {
+        const geoData = await geoResponse.json();
+        if (geoData.length > 0) {
+          cityName = geoData[0].name;
+        }
+      }
+
+      setWeather({
+        temperature: Math.round(data.main.temp),
+        condition: data.weather[0].main,
+        location: cityName,
+        emoji: getWeatherEmoji(data.weather[0].main)
+      });
+    } catch (err) {
+      console.error('Weather fetch error:', err);
+      setError('Weather unavailable');
+      
+      // Fallback weather data for demo purposes
+      setWeather({
+        temperature: 72,
+        condition: 'Clear',
+        location: 'San Francisco, CA',
+        emoji: '☀️'
+      });
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const handleMouseEnter = () => {
     setShowDetails(true);
@@ -159,6 +162,12 @@ const Weather: React.FC = () => {
 
   const handleMouseLeave = () => {
     setShowDetails(false);
+  };
+
+  const handleClick = () => {
+    if (!locationRequested && !loading) {
+      getWeather();
+    }
   };
 
   if (loading) {
@@ -173,6 +182,19 @@ const Weather: React.FC = () => {
     return (
       <WeatherIcon title="Weather unavailable">
         <WeatherEmoji>❌</WeatherEmoji>
+      </WeatherIcon>
+    );
+  }
+
+  // Show clickable weather icon if location hasn't been requested
+  if (!locationRequested && !weather) {
+    return (
+      <WeatherIcon 
+        title="Click to get weather"
+        onClick={handleClick}
+        style={{ cursor: 'pointer' }}
+      >
+        <WeatherEmoji>🌤️</WeatherEmoji>
       </WeatherIcon>
     );
   }
