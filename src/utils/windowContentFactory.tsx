@@ -1,5 +1,6 @@
 import React from 'react';
 import { DesktopIcon as DesktopIconType } from '../types';
+import { SilentEmbedIframe } from '../components/SilentEmbed';
 
 export const createWindowContent = (icon: DesktopIconType): React.ReactNode => {
   switch (icon.type) {
@@ -137,22 +138,14 @@ const createFileContent = (icon: DesktopIconType): React.ReactNode => {
 
 const createAppContent = (icon: DesktopIconType): React.ReactNode => {
 
-  if (icon.name === 'Pinball') {
-    return (
-      <iframe
-        src="https://98.js.org/programs/pinball/space-cadet.html"
-        width="100%"
-        height="100%"
-        style={{
-          border: 'none',
-          borderRadius: '0',
-          display: 'block'
-        }}
-        title="Space Cadet Pinball"
-        allowFullScreen
-      />
-    );
-  }
+if (icon.name === 'Pinball') {
+  return (
+    <SilentEmbedIframe
+      src="https://98.js.org/programs/pinball/space-cadet.html"
+      title="Space Cadet Pinball"
+    />
+  );
+}
 
   if (icon.name === "Coder's Playlist") {
     return (

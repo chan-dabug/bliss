@@ -8,6 +8,7 @@ import StartMenu from './components/StartMenu';
 import WelcomeModal from './components/WelcomeModal';
 import WindowLayer from './components/WindowLayer';
 import ContactModal from './components/ContactModal';
+import PinballConfirmationModal from './components/PinballConfirmationModal';
 import { DesktopIcon as DesktopIconType } from './types';
 import { ASSET_PATHS, APP_NAMES } from './constants';
 import { createWindowContent } from './utils/windowContentFactory';
@@ -58,6 +59,8 @@ const AppContent: React.FC = () => {
   const [isStartMenuOpen, setIsStartMenuOpen] = useState(false);
   const [showWelcomeModal, setShowWelcomeModal] = useState(false);
   const [showContactModal, setShowContactModal] = useState(false);
+  const [showPinballConfirmation, setShowPinballConfirmation] = useState(false);
+  const [pendingPinballIcon, setPendingPinballIcon] = useState<DesktopIconType | null>(null);
 
   // Show welcome modal on initial load
   useEffect(() => {
@@ -81,6 +84,13 @@ const AppContent: React.FC = () => {
   }, []);
 
   const handleIconClick = useCallback((icon: DesktopIconType) => {
+    // Special handling for pinball - show confirmation modal first
+    if (icon.name === APP_NAMES.PINBALL) {
+      setPendingPinballIcon(icon);
+      setShowPinballConfirmation(true);
+      return;
+    }
+
     // Special handling for resume/PDF files - show modal-style PDF viewer
     if (icon.name.toLowerCase().includes('resume') || icon.meta?.mime === 'application/pdf') {
       const fileUrl = icon.meta?.fileUrl ?? '/ChanBoswellResume.pdf';
@@ -198,6 +208,20 @@ const AppContent: React.FC = () => {
     setShowContactModal(false);
   }, []);
 
+  const handlePinballConfirm = useCallback(() => {
+    if (pendingPinballIcon) {
+      const content = createWindowContent(pendingPinballIcon);
+      open(pendingPinballIcon.id, pendingPinballIcon.name, content);
+    }
+    setShowPinballConfirmation(false);
+    setPendingPinballIcon(null);
+  }, [pendingPinballIcon, open]);
+
+  const handlePinballCancel = useCallback(() => {
+    setShowPinballConfirmation(false);
+    setPendingPinballIcon(null);
+  }, []);
+
 
 
   const handleStartMenuIconClick = useCallback((icon: DesktopIconType) => {
@@ -248,6 +272,13 @@ const AppContent: React.FC = () => {
       <ContactModal 
         isOpen={showContactModal}
         onClose={handleCloseContactModal}
+      />
+
+      {/* Pinball Confirmation Modal - Outside Desktop component for proper overlay */}
+      <PinballConfirmationModal 
+        isOpen={showPinballConfirmation}
+        onConfirm={handlePinballConfirm}
+        onCancel={handlePinballCancel}
       />
     </div>
   );
