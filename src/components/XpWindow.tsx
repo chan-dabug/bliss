@@ -16,8 +16,8 @@ const WindowContainer = styled.div<{ z: number; isPinball?: boolean }>`
   border-radius: 0;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
   font-family: 'Tahoma', 'Segoe UI', 'Arial', sans-serif;
-  width: ${props => props.isPinball ? '800px' : '600px'};
-  height: ${props => props.isPinball ? '600px' : '450px'};
+  width: ${props => props.isPinball ? '90vw' : '80vw'};
+  height: ${props => props.isPinball ? '90vh' : '80vh'};
   overflow: hidden;
   cursor: default;
   z-index: ${props => props.z};
@@ -88,7 +88,7 @@ const XpWindow: React.FC<XpWindowProps> = ({
   onMinimize, 
   onFocus 
 }) => {
-  const [position, setPosition] = useState({ x: 100, y: 100 });
+  const [position, setPosition] = useState({ x: window.title === 'Pinball' ? 20: 40, y: 20 });
   const [isDragging, setIsDragging] = useState(false);
   const [dragOffset, setDragOffset] = useState({ x: 0, y: 0 });
   
