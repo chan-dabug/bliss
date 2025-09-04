@@ -37,6 +37,13 @@ A React + TypeScript portfolio website that authentically mimics the Windows XP 
 - **Context API**: Window manager and class token providers
 - **Local Storage**: Icon position persistence
 
+
+### Demo
+
+ ![bliss](https://github.com/user-attachments/assets/5a1a9499-c459-4881-8ec2-9e289f4567a3)
+
+![blissMobile](https://github.com/user-attachments/assets/2900de50-8668-4bcf-b7b8-784f9cf8b24a)
+
 ### Component Structure
 ```
 src/
