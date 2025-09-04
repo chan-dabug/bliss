@@ -133,9 +133,12 @@ export default function ContactForm({ onClose }: ContactFormProps) {
 
 
   // EmailJS configuration
-  const PUBLIC_KEY = '2xv-bpv_GBb7NxBpS';
-  const SERVICE_ID = 'service_asgma6f';
-  const TEMPLATE_IDS = ['template_piwuaz9', 'template_13lsdyg'] as const;
+  const PUBLIC_KEY = process.env.REACT_APP_EMAILJS_PUBLIC_KEY || '';
+  const SERVICE_ID = process.env.REACT_APP_EMAILJS_SERVICE_ID || '';
+  const TEMPLATE_IDS = [
+    process.env.REACT_APP_EMAILJS_TEMPLATE_ID_1 || '',
+    process.env.REACT_APP_EMAILJS_TEMPLATE_ID_2 || ''
+  ] as const;
 
 
 

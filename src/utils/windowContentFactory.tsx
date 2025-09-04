@@ -16,42 +16,6 @@ export const createWindowContent = (icon: DesktopIconType): React.ReactNode => {
 };
 
 const createFolderContent = (icon: DesktopIconType): React.ReactNode => {
-  if (icon.name === 'My LinkedIn') {
-    return (
-      <div className="folder-content">
-        <div className="linkedin-content">
-          <h1>My LinkedIn Profile</h1>
-          <div className="profile-section">
-            <h2>Chan Boswell</h2>
-            <p className="title">Software Developer</p>
-            <p className="location">📍 San Francisco Bay Area</p>
-          </div>
-          <div className="skills-section">
-            <h3>Technical Skills</h3>
-            <ul>
-              <li>React & TypeScript</li>
-              <li>Node.js & Express</li>
-              <li>Python & Django</li>
-              <li>Cloud Computing (AWS, GCP)</li>
-              <li>DevOps & CI/CD</li>
-            </ul>
-          </div>
-          <div className="experience-section">
-            <h3>Experience</h3>
-            <p>Building innovative web applications and creative digital experiences</p>
-            <p>Specializing in full-stack development and modern web technologies</p>
-          </div>
-          <div className="contact-section">
-            <h3>Connect With Me</h3>
-            <p>📧 chan@example.com</p>
-            <p>🐙 github.com/chanboswell</p>
-            <p>💼 linkedin.com/in/chanboswell</p>
-          </div>
-        </div>
-      </div>
-    );
-  }
-  
   if (icon.name === 'Projects') {
     return (
       <div className="folder-content">
